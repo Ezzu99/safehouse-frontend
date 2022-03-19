@@ -1,4 +1,4 @@
-const AffiliationFormNGO = () => {
+const NGO = () => {
     return (
       <>
         <h1>Affiliation Form NGO</h1>
@@ -6,4 +6,4 @@ const AffiliationFormNGO = () => {
     )
   }
   
-  export default AffiliationFormNGO;
+  export default NGO;
