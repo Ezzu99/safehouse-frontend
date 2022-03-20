@@ -1,18 +1,10 @@
 import * as React from 'react';
 import LoginForm from '../src/components/LoginForm';
-import { Button, createMuiTheme, ThemeProvider, Typography } from "@mui/material";
+import { Button, ThemeProvider, Typography } from "@mui/material";
+import HeadingFont from '../src/fonts/fonts';
 import { Box } from "@mui/system";
 import Link from 'next/link';
 import { green } from '@mui/material/colors';
-
-const HeadingFont = createMuiTheme({
-  typography: {
-    fontFamily: [
-      'Poppins',
-      'sans-serif',
-    ].join(','),
-  },
-})
 
 const Index = () => {
   return (
