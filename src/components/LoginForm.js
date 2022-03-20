@@ -23,21 +23,26 @@ const LoginForm = () => {
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [selected, setSelected] = React.useState(false);
-    const [openSnack, setOpenSnack] = React.useState(false);
+    const [openErrorSnack, setOpenErrorSnack] = React.useState(false);
+    const [openAlertSnack, setOpenAlertSnack] = React.useState(false);
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
 
-        setOpenSnack(false);
+        setOpenErrorSnack(false);
+        setOpenAlertSnack(false);
     };
 
     const submitLogin = () => {
         console.log(username, password);
         
         if (username == '' | password == '') {
-            setOpenSnack(true);
+            setOpenAlertSnack(true);
+        }
+        else {
+            setOpenErrorSnack(true);
         }
     }
 
@@ -53,9 +58,14 @@ const LoginForm = () => {
                 <ColorButton size='large' variant='contained' onClick={submitLogin}>Login</ColorButton>
                 <Typography color='primary' align='center'><Link href='/' underline='hover'>Forgotten Password?</Link></Typography>
             </Box>
-            <Snackbar open={openSnack} autoHideDuration={6000} onClose={handleClose}>
+            <Snackbar open={openErrorSnack} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
                 Invalid username or password!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openAlertSnack} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
+                Enter username and password!
                 </Alert>
             </Snackbar>
         </Box>

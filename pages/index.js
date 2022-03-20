@@ -14,7 +14,7 @@ const Index = () => {
           <Typography variant='h4' sx={{ color: 'gray' }}>At SafeHouse we not only improve society, but we help <Typography variant='body' color={green[800]} >create</Typography> one.</Typography>
           <Typography variant='h6' sx={{ marginTop: '8px', color: 'gray' }}>Interested in joining hands together?</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', gap: '12px' }}>
-            <Link href='/AffiliationForm/NGO'><Button size='large' variant="contained" sx={{ marginTop: '12px' }}>Affiliate with us</Button></Link>
+            <Link href='/AffiliationForm/NGO' underline='none'><Button size='large' variant="contained" sx={{ marginTop: '12px' }}>Affiliate with us</Button></Link>
             <Link href='/' underline='none'><Button size='large' variant="outlined" sx={{ marginTop: '12px' }}>Discover More</Button></Link>
           </Box>
         </Box>
