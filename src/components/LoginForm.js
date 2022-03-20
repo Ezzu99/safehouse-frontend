@@ -22,6 +22,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
     '&:hover': {
         backgroundColor: green[800],
     },
+    textTransform: 'capitalize',
 }));
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -98,7 +99,7 @@ const LoginForm = () => {
                     <Typography sx={{ color: 'gray' }} onClick={() => { setSelected(!selected) }}>Remember me</Typography>
                 </Box>
                 <ColorButton id='loginButton' size='large' variant='contained' onClick={submitForm} disabled={disableLogin}>Login</ColorButton>
-                <Typography color='primary' align='center'><Link href='/' underline='hover'>Forgotten Password?</Link></Typography>
+                <Typography color='primary' align='center'><Link href='/' underline='hover'>Forgotten password?</Link></Typography>
             </Box>
             <Snackbar open={openErrorSnack} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
