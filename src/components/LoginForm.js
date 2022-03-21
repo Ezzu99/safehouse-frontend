@@ -1,11 +1,11 @@
 import * as React from 'react';
 import axios from 'axios';
 import Link from '@mui/material/Link';
-import { Button, Typography, TextField, Checkbox, Snackbar } from "@mui/material";
+import { Typography, TextField, Checkbox, Snackbar } from "@mui/material";
 import MuiAlert from '@mui/material/Alert';
 import { Box } from "@mui/system";
-import { green } from '@mui/material/colors';
-import { styled } from '@mui/material/styles';
+import { purple } from '@mui/material/colors';
+import { ColorButtonSolidOrange } from './ColorButton'
 
 let instance = axios.create({
     baseURL: 'http://safehouse.herokuapp.com',
@@ -14,16 +14,7 @@ let instance = axios.create({
             'Content-Type': 'application/json'
         }
     }
-})
-
-const ColorButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText(green[700]),
-    backgroundColor: green[700],
-    '&:hover': {
-        backgroundColor: green[800],
-    },
-    textTransform: 'capitalize',
-}));
+});
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -44,12 +35,12 @@ const LoginForm = () => {
     const submitForm = async (e) => {
         e.preventDefault();
 
-        setDisableLogin(true);
-
         if (username == '' | password == '') {
             setOpenAlertSnack(true);
         }
         else {
+            setDisableLogin(true);
+            
             try {
                 let res = await instance.post('/v1/login/', {
                     username,
@@ -91,15 +82,15 @@ const LoginForm = () => {
 
     return (
         <Box sx={{ height: '400px' }}>
-            <Box sx={{ width: '400px', padding: '18px', bgcolor: 'white', borderRadius: '12px', boxShadow: '0 10px 28px #ddd', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <Box sx={{ width: '400px', padding: '18px', bgcolor: 'white', borderRadius: '12px', boxShadow: '0 4px 18px #ccc', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <TextField id="outlined-basic" label="Username" variant="outlined" value={username} onChange={(e) => { setUsername(e.target.value) }} />
                 <TextField id="outlined-basic" label="Password" type='password' variant="outlined" value={password} onChange={(e) => { setPassword(e.target.value) }}/>
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
-                    <Checkbox checked={selected} onClick={() => { setSelected(!selected) }} />
+                    <Checkbox checked={selected} onClick={() => { setSelected(!selected) }} sx={{ '&.Mui-checked': {color: purple[700]} }} />
                     <Typography sx={{ color: 'gray' }} onClick={() => { setSelected(!selected) }}>Remember me</Typography>
                 </Box>
-                <ColorButton id='loginButton' size='large' variant='contained' onClick={submitForm} disabled={disableLogin}>Login</ColorButton>
-                <Typography color='primary' align='center'><Link href='/' underline='hover'>Forgotten password?</Link></Typography>
+                <ColorButtonSolidOrange id='loginButton' size='large' variant='contained' onClick={submitForm} disabled={disableLogin}>Login</ColorButtonSolidOrange>
+                <Typography align='center'><Link href='/' underline='hover' color={purple[600]}>Forgot password?</Link></Typography>
             </Box>
             <Snackbar open={openErrorSnack} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
