@@ -27,6 +27,8 @@ const LoginForm = () => {
     const [disableLogin, setDisableLogin] = React.useState(false);
     const [openErrorSnack, setOpenErrorSnack] = React.useState(false);
     const [openAlertSnack, setOpenAlertSnack] = React.useState(false);
+    const [alertMessage, setAlertMessage] = React.useState('Enter username and password!');
+    const [autoHideDuration, setAutoHideDuration] = React.useState(6000);
     const [userid, setUserid] = React.useState('');
     const [loggedIn, setLoggedIn] = React.useState(false);
     const [token, setToken] = React.useState('');
@@ -35,7 +37,16 @@ const LoginForm = () => {
     const submitForm = async (e) => {
         e.preventDefault();
 
+        var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+
         if (username == '' | password == '') {
+            setAutoHideDuration(6000);
+            setAlertMessage('Enter username and password!')
+            setOpenAlertSnack(true);
+        }
+        else if (!password.match(regex)) {
+            setAutoHideDuration(10000);
+            setAlertMessage('Password must contain 6 to 20 characters, at least 1 numeric digit, and at least 1 uppercase and lowercase letter!')
             setOpenAlertSnack(true);
         }
         else {
@@ -97,9 +108,9 @@ const LoginForm = () => {
                 Invalid username or password!
                 </Alert>
             </Snackbar>
-            <Snackbar open={openAlertSnack} autoHideDuration={6000} onClose={handleClose}>
+            <Snackbar open={openAlertSnack} autoHideDuration={autoHideDuration} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
-                Enter username and password!
+                {alertMessage}
                 </Alert>
             </Snackbar>
         </Box>
