@@ -1,5 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/router'
 import Link from '@mui/material/Link';
 import { Typography, TextField, Checkbox, Snackbar } from "@mui/material";
 import MuiAlert from '@mui/material/Alert';
@@ -33,6 +34,7 @@ const LoginForm = () => {
     const [loggedIn, setLoggedIn] = React.useState(false);
     const [token, setToken] = React.useState('');
     const [type, setType] = React.useState('');
+    let router = useRouter();
 
     const submitForm = async (e) => {
         e.preventDefault();
@@ -63,8 +65,8 @@ const LoginForm = () => {
                 setType(res.data.role);
                 setUsername(res.data.username);
                 setUserid(res.data.id);
-    
-                history.push('/dashboard');
+                
+                router.push('/Dashboard');
             }
             catch (e) {
                 setOpenErrorSnack(true);
