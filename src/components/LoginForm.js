@@ -31,9 +31,10 @@ const LoginForm = () => {
     const [alertMessage, setAlertMessage] = React.useState('Enter username and password!');
     const [autoHideDuration, setAutoHideDuration] = React.useState(6000);
     const [userid, setUserid] = React.useState('');
+    const [name, setName] = React.useState('');
     const [loggedIn, setLoggedIn] = React.useState(false);
     const [token, setToken] = React.useState('');
-    const [type, setType] = React.useState('');
+    const [role, setRole] = React.useState('');
     let router = useRouter();
 
     const submitForm = async (e) => {
@@ -55,16 +56,26 @@ const LoginForm = () => {
             setDisableLogin(true);
             
             try {
-                let res = await instance.post('/v1/login/', {
-                    username,
-                    password
-                })
+                // let res = await instance.post('/v1/login/', {
+                //     username,
+                //     password
+                // })
+                let res = {
+                    data: {
+                        token: 'abcdefghijklmnopqrstuvwxyz',
+                        role: 'ngo',
+                        username: 'ezaan1999',
+                        id: '1',
+                        name: 'Dar-Ul-Sakoon'
+                    }
+                }
                 console.log(res);
                 setLoggedIn(true);
                 setToken(res.data.token);
-                setType(res.data.role);
+                setRole(res.data.role);
                 setUsername(res.data.username);
                 setUserid(res.data.id);
+                setName(res.data.name);
                 
                 router.push('/Dashboard');
             }
@@ -79,10 +90,11 @@ const LoginForm = () => {
     React.useEffect(()  => {
         localStorage.setItem('loggedIn', JSON.stringify(loggedIn));
         localStorage.setItem('token', token);
-        localStorage.setItem('type', type);
+        localStorage.setItem('role', role);
         localStorage.setItem('username', username);
         localStorage.setItem('id', userid);
-    }, [loggedIn, token, type, username, userid])
+        localStorage.setItem('name', name);
+    }, [loggedIn, token, role, username, userid])
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {

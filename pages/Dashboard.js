@@ -4,9 +4,13 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { purple } from '@mui/material/colors';
+import Drawer from '@mui/material/Drawer';
+import { purple, orange } from '@mui/material/colors';
 import { ThemeProvider } from '@mui/material';
 import HeadingFont from '../src/fonts/fonts';
+import GraphingComponent from '../src/components/GraphingComponent';
+import DataTable from '../src/components/DataTable';
+import styles from '../styles/Home.module.css';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -41,43 +45,75 @@ function a11yProps(index) {
     };
 }
 
-export default function Sidebar() {
+const Sidebar = () => {
+    const [name, setName] = React.useState('');
+    const [role, setRole] = React.useState('');
     const [value, setValue] = React.useState(0);
+    const [openSidebar, setOpenSidebar] = React.useState(true)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
+    React.useEffect(() => {
+        setRole(localStorage.getItem('role'));
+        setName(localStorage.getItem('name'));
+    }, [])
+    
     return (
-        <Box
-            sx={{ bgcolor: 'white', display: 'flex', height: '100vh', width: '100%', flexDirection: 'row' }}
-        >
-            <Box sx={{ width: '250px', height: '100vh', borderRight: 1, borderColor: 'divider' }}>
-                <Box sx={{ height: '75px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Box sx={{ bgcolor: 'white', display: 'flex', height: '100vh', width: '100%', flexDirection: 'row' }}>
+            <Drawer anchor={'left'} open={openSidebar} onBackdropClick={() => setOpenSidebar(false)}>
+            <Box sx={{ width: '270px', height: '100vh' }}>
+                <Box sx={{ height: '75px', paddingX: '46px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <ThemeProvider theme={HeadingFont}>
                         <Typography variant="h4" color={purple[600]} sx={{ fontWeight: 'bold' }}>SafeHouse</Typography>
                     </ThemeProvider>
                 </Box>
-                <Tabs
-                    orientation="vertical"
-                    variant="scrollable"
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="Vertical tabs example"
-                    sx={{ flexGrow: 1 }}
-                >
-                    <Tab label="Dashboard" {...a11yProps(0)} />
-                    <Tab label="Item Two" {...a11yProps(1)} />
-                    <Tab label="Item Three" {...a11yProps(2)} />
-                    <Tab label="Item Four" {...a11yProps(3)} />
-                </Tabs>
+                <Box sx={{ marginTop: '12px', marginBottom: '28px', marginX: '24px', paddingX: '22px', paddingY: '12px', bgcolor: `${orange[100]}`, borderRadius: '8px' }}>
+                    <Typography variant='body1' color={orange[600]} sx={{ fontWeight: 'bold' }}>{name}</Typography>
+                </Box>
+                {
+                    (role == 'ngo') ?
+                    <Tabs
+                        orientation="vertical"
+                        variant="scrollable"
+                        value={value}
+                        textColor="secondary"
+                        TabIndicatorProps={{
+                            style: { background: purple[600], width: '3.5px' }
+                        }}
+                        onChange={handleChange}
+                        aria-label="Vertical tabs example"
+                        sx={{ flexGrow: 1 }}
+                    >
+                        <Tab label="Dashboard" sx={{ display: 'flex', alignItems: 'flex-start', paddingLeft: '46px' }} {...a11yProps(0)} />
+                        <Tab label="Users" sx={{ display: 'flex', alignItems: 'flex-start', paddingLeft: '46px' }} {...a11yProps(1)} />
+                    </Tabs> :
+                    <Tabs
+                        orientation="vertical"
+                        variant="scrollable"
+                        value={value}
+                        textColor="secondary"
+                        TabIndicatorProps={{
+                            style: { background: purple[600], width: '3.5px' }
+                        }}
+                        onChange={handleChange}
+                        aria-label="Vertical tabs example"
+                        sx={{ flexGrow: 1 }}
+                    >
+                        <Tab label="Item one" sx={{ display: 'flex', alignItems: 'flex-start', paddingLeft: '34px' }} {...a11yProps(2)} />
+                        <Tab label="Item two" sx={{ display: 'flex', alignItems: 'flex-start', paddingLeft: '34px' }} {...a11yProps(3)} />
+                    </Tabs>
+                }
             </Box>
-            <Box sx={{ flexGrow: 1, height: '100vh' }}>
+            </Drawer>
+            <Box sx={{ width: '100%', height: '100vh' }}>
+                <Box className={[styles.bgimage, styles.bgimage2]}></Box>
                 <TabPanel value={value} index={0}>
-                Item One
+                    <GraphingComponent />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                Item Two
+                    <DataTable />
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                 Item Three
@@ -89,3 +125,5 @@ export default function Sidebar() {
         </Box>
     );
 }
+
+export default Sidebar;

@@ -1,14 +1,27 @@
 .bgimage {
+  background-repeat: no-repeat;
+  overflow: hidden;
+  position: absolute;
+}
+
+.bgimage1 {
   width: 100%;
   height: 100vh;
-  background-image: url('../src/assets/ssscribble2.svg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
-  overflow: hidden;
-  filter: blur(2px);
+  background-image: url('../src/assets/ssscribble2.svg');
+  background-position: center;
+  background-size: cover;
+}
+
+.bgimage2 {
+  width: 1200px;
+  height: 1200px;
+  bottom: 0;
+  right: 0;
+  z-index: 0;
+  background-position: 500px 500px;
+  background-size: cover;
+  background-image: url('../src/assets/ssscribble1.svg');
 }
