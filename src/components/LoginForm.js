@@ -1,12 +1,12 @@
 import * as React from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import Link from '@mui/material/Link';
 import { Typography, TextField, Checkbox, Snackbar } from "@mui/material";
 import MuiAlert from '@mui/material/Alert';
 import { Box } from "@mui/system";
 import { purple } from '@mui/material/colors';
-import { ColorButtonSolidOrange } from './ColorButton'
+import { ColorButtonSolidOrange } from './ColorButton';
 
 let instance = axios.create({
     baseURL: 'http://safehouse.herokuapp.com',
@@ -32,6 +32,7 @@ const LoginForm = () => {
     const [autoHideDuration, setAutoHideDuration] = React.useState(6000);
     const [userid, setUserid] = React.useState('');
     const [name, setName] = React.useState('');
+    const [email, setEmail] = React.useState('');
     const [loggedIn, setLoggedIn] = React.useState(false);
     const [token, setToken] = React.useState('');
     const [role, setRole] = React.useState('');
@@ -66,7 +67,8 @@ const LoginForm = () => {
                         role: 'ngo',
                         username: 'ezaan1999',
                         id: '1',
-                        name: 'Dar-Ul-Sakoon'
+                        name: 'Dar-Ul-Sakoon',
+                        email: 'ezaan1999.ali@gmail.com'
                     }
                 }
                 console.log(res);
@@ -76,6 +78,7 @@ const LoginForm = () => {
                 setUsername(res.data.username);
                 setUserid(res.data.id);
                 setName(res.data.name);
+                setEmail(res.data.email);
                 
                 router.push('/Dashboard');
             }
@@ -94,7 +97,8 @@ const LoginForm = () => {
         localStorage.setItem('username', username);
         localStorage.setItem('id', userid);
         localStorage.setItem('name', name);
-    }, [loggedIn, token, role, username, userid])
+        localStorage.setItem('email', email);
+    }, [loggedIn, token, role, username, userid, email])
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {

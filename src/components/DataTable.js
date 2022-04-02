@@ -23,16 +23,7 @@ const columns = [
       type: 'number',
       width: 110,
       editable: false,
-    },
-    {
-      field: 'fullName',
-      headerName: 'Full name',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-    },
+    }
 ];
 
 const rows = [
@@ -60,6 +51,7 @@ const DataTable = () => {
         <Box sx={{ 
                 width: '100%',
                 height: '80vh',
+                paddingX: '22px',
                 backdropFilter: 'blur(3px)',
                 position: 'relative',
                 zIndex: '10',
@@ -67,7 +59,6 @@ const DataTable = () => {
                 flexDirection: 'column'
             }}
         >
-            
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -83,7 +74,7 @@ const DataTable = () => {
                         outline: 'none',
                     },
                     '.MuiDataGrid-row:hover': {
-                        bgcolor: orange[100]
+                        bgcolor: orange[200]+'95'
                     },
                     '.MuiDataGrid-selectedRowCount': {
                         color: purple[700]

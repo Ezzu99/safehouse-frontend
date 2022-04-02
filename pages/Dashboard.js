@@ -4,13 +4,15 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
 import { purple, orange } from '@mui/material/colors';
 import { ThemeProvider } from '@mui/material';
 import HeadingFont from '../src/fonts/fonts';
 import GraphingComponent from '../src/components/GraphingComponent';
 import DataTable from '../src/components/DataTable';
 import styles from '../styles/Home.module.css';
+import Appbar from '../src/components/Appbar';
+import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
+import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -49,7 +51,6 @@ const Sidebar = () => {
     const [name, setName] = React.useState('');
     const [role, setRole] = React.useState('');
     const [value, setValue] = React.useState(0);
-    const [openSidebar, setOpenSidebar] = React.useState(true)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -62,14 +63,13 @@ const Sidebar = () => {
     
     return (
         <Box sx={{ bgcolor: 'white', display: 'flex', height: '100vh', width: '100%', flexDirection: 'row' }}>
-            <Drawer anchor={'left'} open={openSidebar} onBackdropClick={() => setOpenSidebar(false)}>
-            <Box sx={{ width: '270px', height: '100vh' }}>
-                <Box sx={{ height: '75px', paddingX: '46px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Box sx={{ width: '270px', height: '100vh', boxShadow: '10px 0 24px -8px #dedede', backdropFilter: 'blur(3px)', position: 'relative', zIndex: 10}}>
+                <Box sx={{ height: '90px', paddingX: '46px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <ThemeProvider theme={HeadingFont}>
                         <Typography variant="h4" color={purple[600]} sx={{ fontWeight: 'bold' }}>SafeHouse</Typography>
                     </ThemeProvider>
                 </Box>
-                <Box sx={{ marginTop: '12px', marginBottom: '28px', marginX: '24px', paddingX: '22px', paddingY: '12px', bgcolor: `${orange[100]}`, borderRadius: '8px' }}>
+                <Box sx={{ marginTop: '12px', marginBottom: '28px', marginX: '24px', paddingX: '22px', paddingY: '20px', bgcolor: orange[100], borderRadius: '8px' }}>
                     <Typography variant='body1' color={orange[600]} sx={{ fontWeight: 'bold' }}>{name}</Typography>
                 </Box>
                 {
@@ -80,14 +80,13 @@ const Sidebar = () => {
                         value={value}
                         textColor="secondary"
                         TabIndicatorProps={{
-                            style: { background: purple[600], width: '3.5px' }
+                            style: { background: purple[600], width: '3.5px', borderTopLeftRadius: '8px', borderBottomLeftRadius: '8px' }
                         }}
                         onChange={handleChange}
-                        aria-label="Vertical tabs example"
                         sx={{ flexGrow: 1 }}
                     >
-                        <Tab label="Dashboard" sx={{ display: 'flex', alignItems: 'flex-start', paddingLeft: '46px' }} {...a11yProps(0)} />
-                        <Tab label="Users" sx={{ display: 'flex', alignItems: 'flex-start', paddingLeft: '46px' }} {...a11yProps(1)} />
+                        <Tab label="Dashboard" icon={<DashboardRoundedIcon fontSize='small'/>} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(0)} />
+                        <Tab label="Users" icon={<PeopleAltRoundedIcon fontSize='small'/>} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(1)} />
                     </Tabs> :
                     <Tabs
                         orientation="vertical"
@@ -95,20 +94,19 @@ const Sidebar = () => {
                         value={value}
                         textColor="secondary"
                         TabIndicatorProps={{
-                            style: { background: purple[600], width: '3.5px' }
+                            style: { background: purple[600], width: '3.5px', borderTopLeftRadius: '8px', borderBottomLeftRadius: '8px' }
                         }}
                         onChange={handleChange}
-                        aria-label="Vertical tabs example"
                         sx={{ flexGrow: 1 }}
                     >
-                        <Tab label="Item one" sx={{ display: 'flex', alignItems: 'flex-start', paddingLeft: '34px' }} {...a11yProps(2)} />
-                        <Tab label="Item two" sx={{ display: 'flex', alignItems: 'flex-start', paddingLeft: '34px' }} {...a11yProps(3)} />
+                        <Tab label="Workshops" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(2)} />
+                        <Tab label="Jobs" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(3)} />
                     </Tabs>
                 }
             </Box>
-            </Drawer>
             <Box sx={{ width: '100%', height: '100vh' }}>
                 <Box className={[styles.bgimage, styles.bgimage2]}></Box>
+                <Appbar />
                 <TabPanel value={value} index={0}>
                     <GraphingComponent />
                 </TabPanel>
@@ -116,10 +114,10 @@ const Sidebar = () => {
                     <DataTable />
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                Item Three
+                Workshops
                 </TabPanel>
                 <TabPanel value={value} index={3}>
-                Item Four
+                Jobs
                 </TabPanel>
             </Box>
         </Box>
