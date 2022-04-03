@@ -1,5 +1,4 @@
-import { Badge, Box } from "@mui/material";
-import { TextField } from "@mui/material";
+import { Badge, Box, Input } from "@mui/material";
 import AccountMenu from "./AccountMenu";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
@@ -24,17 +23,17 @@ const Appbar = () => {
         <Box sx={{ height: '75px', paddingX: '46px', paddingY: '24px', backdropFilter: 'blur(2px)', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <Box sx={{ width: '270px', display: 'flex', alignItems: 'flex-end' }}>
                 <SearchRoundedIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-                <TextField id="input-with-sx" label="Search" variant="standard" color="secondary"/>
+                <Input id="input-with-sx" placeholder="Search" variant="standard" color="secondary"/>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '8px' }}>
                 <IconButton>
-                    <StyledBadge badgeContent={4}>
-                        <ChatBubbleRoundedIcon fontSize="medium" sx={{ color: 'gray' }}/>
+                    <StyledBadge badgeContent={3}>
+                        <NotificationsRoundedIcon fontSize="medium" sx={{ color: 'gray' }}/>
                     </StyledBadge>
                 </IconButton>
                 <IconButton>
-                    <StyledBadge badgeContent={3}>
-                        <NotificationsRoundedIcon fontSize="medium" sx={{ color: 'gray' }}/>
+                    <StyledBadge badgeContent={4}>
+                        <ChatBubbleRoundedIcon fontSize="medium" sx={{ color: 'gray' }}/>
                     </StyledBadge>
                 </IconButton>
                 <AccountMenu />

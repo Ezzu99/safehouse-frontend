@@ -87,6 +87,7 @@ const Sidebar = () => {
                     >
                         <Tab label="Dashboard" icon={<DashboardRoundedIcon fontSize='small'/>} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(0)} />
                         <Tab label="Users" icon={<PeopleAltRoundedIcon fontSize='small'/>} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(1)} />
+                        <Tab label="Listers" icon={<PeopleAltRoundedIcon fontSize='small'/>} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(2)} />
                     </Tabs> :
                     <Tabs
                         orientation="vertical"
@@ -99,8 +100,8 @@ const Sidebar = () => {
                         onChange={handleChange}
                         sx={{ flexGrow: 1 }}
                     >
-                        <Tab label="Workshops" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(2)} />
-                        <Tab label="Jobs" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(3)} />
+                        <Tab label="Workshops" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(3)} />
+                        <Tab label="Jobs" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(4)} />
                     </Tabs>
                 }
             </Box>
@@ -111,12 +112,15 @@ const Sidebar = () => {
                     <GraphingComponent />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <DataTable />
+                    <DataTable table='user'/>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                Workshops
+                    <DataTable table='lister'/>
                 </TabPanel>
                 <TabPanel value={value} index={3}>
+                Workshops
+                </TabPanel>
+                <TabPanel value={value} index={4}>
                 Jobs
                 </TabPanel>
             </Box>
