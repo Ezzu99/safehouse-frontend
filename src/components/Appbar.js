@@ -1,4 +1,4 @@
-import { Badge, Box, Input } from "@mui/material";
+import { Badge, Box, InputBase } from "@mui/material";
 import AccountMenu from "./AccountMenu";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
@@ -20,10 +20,10 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const Appbar = () => {
     return (
-        <Box sx={{ height: '75px', paddingX: '46px', paddingY: '24px', backdropFilter: 'blur(2px)', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-            <Box sx={{ width: '270px', display: 'flex', alignItems: 'flex-end' }}>
+        <Box sx={{ paddingX: '46px', paddingY: '12px', backdropFilter: 'blur(14px)', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+            <Box sx={{ width: '270px', paddingX: '12px', paddingTop: '8px', paddingBottom: '6px', borderRadius: '8px', bgcolor: 'divider', backdropFilter: 'blur(24px)', display: 'flex', alignItems: 'flex-end' }}>
                 <SearchRoundedIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-                <Input id="input-with-sx" placeholder="Search" variant="standard" color="secondary"/>
+                <InputBase id="input-with-sx" placeholder="Search" variant="standard" color="secondary"/>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '8px' }}>
                 <IconButton>

@@ -62,8 +62,8 @@ const Sidebar = () => {
     }, [])
     
     return (
-        <Box sx={{ bgcolor: 'white', display: 'flex', height: '100vh', width: '100%', flexDirection: 'row' }}>
-            <Box sx={{ width: '270px', height: '100vh', boxShadow: '10px 0 24px -8px #dedede', backdropFilter: 'blur(3px)', position: 'relative', zIndex: 10}}>
+        <Box sx={{ bgcolor: 'white', display: 'flex', height: '100vh', width: '100%', flexDirection: 'row', overflow: 'hidden' }}>
+            <Box sx={{ width: '270px', height: '100vh', boxShadow: '10px 0 24px -8px #dedede', backdropFilter: 'blur(3px)', position: 'relative', zIndex: 20}}>
                 <Box sx={{ height: '90px', paddingX: '46px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <ThemeProvider theme={HeadingFont}>
                         <Typography variant="h4" color={purple[600]} sx={{ fontWeight: 'bold' }}>SafeHouse</Typography>
@@ -105,9 +105,11 @@ const Sidebar = () => {
                     </Tabs>
                 }
             </Box>
-            <Box sx={{ width: '100%', height: '100vh' }}>
+            <Box sx={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column' }}>
                 <Box className={[styles.bgimage, styles.bgimage2]}></Box>
-                <Appbar />
+                <Box sx={{ width: '100%', height: '40px', position: 'relative', zIndex: 15  }}>
+                    <Appbar />
+                </Box>
                 <TabPanel value={value} index={0}>
                     <GraphingComponent />
                 </TabPanel>

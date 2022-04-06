@@ -22,30 +22,40 @@ const GraphingComponent = () => {
     }, [])
 
     return (
-        <Box sx={{ width: '100%', height: '80vh', paddingX: '22px', overflow: 'auto', position: 'relative', zIndex: '10' }}>
+        <Box sx={{ width: '100%', height: '100vh', paddingX: '46px', paddingTop: '60px', display: 'flex', flexDirection: 'column', overflow: 'auto', position: 'relative', zIndex: '10' }}>
             <ThemeProvider theme={HeadingFont}>
                 <Typography variant="h4" sx={{ color: '#333', fontSize: 'bold' }}>Hi, Welcome back</Typography>
             </ThemeProvider>
-            <Box sx={{ flexGrow: 1, marginTop: '12px' }}>
+            <Box sx={{ flexGrow: 1, paddingTop: '12px', paddingBottom: '120px' }}>
                 <Grid container spacing={2}>
                     <Grid item xs={8}>
                         <Item>
-                            <Box sx={{ height: '140px', bgcolor: purple[50], borderRadius: '8px' }}></Box>
+                            <Box sx={{ height: '340px', bgcolor: purple[50], borderRadius: '8px' }}></Box>
                         </Item>
                     </Grid>
                     <Grid item xs={4}>
                         <Item>
-                            <Box sx={{ height: '140px', bgcolor: orange[100], borderRadius: '8px' }}></Box>
+                            <Box sx={{ height: '340px', bgcolor: orange[100], borderRadius: '8px' }}></Box>
                         </Item>
                     </Grid>
                     <Grid item xs={5}>
                         <Item>
-                            <Box sx={{ height: '140px', bgcolor: orange[100], borderRadius: '8px' }}></Box>
+                            <Box sx={{ height: '240px', bgcolor: orange[100], borderRadius: '8px' }}></Box>
                         </Item>
                     </Grid>
                     <Grid item xs={7}>
                         <Item>
-                            <Box sx={{ height: '140px', bgcolor: purple[50], borderRadius: '8px' }}></Box>
+                            <Box sx={{ height: '240px', bgcolor: purple[50], borderRadius: '8px' }}></Box>
+                        </Item>
+                    </Grid>
+                    <Grid item xs={7}>
+                        <Item>
+                            <Box sx={{ height: '240px', bgcolor: purple[50], borderRadius: '8px' }}></Box>
+                        </Item>
+                    </Grid>
+                    <Grid item xs={5}>
+                        <Item>
+                            <Box sx={{ height: '240px', bgcolor: purple[50], borderRadius: '8px' }}></Box>
                         </Item>
                     </Grid>
                 </Grid>

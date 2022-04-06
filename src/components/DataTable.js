@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box } from "@mui/material";
+import { Box, Drawer } from "@mui/material";
 import { purple, orange } from '@mui/material/colors';
 import IconButton from '@mui/material/IconButton';
 import { ColorButtonSolidOrange } from './ColorButton';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
+import RegistrationForm from './RegistrationForm';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -53,6 +54,7 @@ const rows = [
 const DataTable = (props) => {
     const [disable, setDisable] = React.useState(false);
     const [selectedRows, setSelectedRows] = React.useState([]);
+    const [drawer, setDrawer] = React.useState(false);
 
     const deleteRows = (e) => {
         console.log(selectedRows);
@@ -65,22 +67,23 @@ const DataTable = (props) => {
     return (
         <Box sx={{ 
                 width: '100%',
-                height: '80vh',
-                paddingX: '22px',
+                height: '90vh',
+                paddingX: '46px',
+                paddingTop: '60px',
                 position: 'relative',
                 zIndex: '10',
                 display: 'flex',
                 flexDirection: 'column'
             }}
         >
-            <Box sx={{ marginX: '6px', marginBottom: '4px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Box sx={{ padding: '6px', border: 'none', borderTop: 1, borderRight: 1, borderLeft: 1, borderColor: 'divider', borderTopRightRadius: '8px', borderTopLeftRadius: '8px', backdropFilter: 'blur(3px)', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <IconButton disabled={disable} onClick={deleteRows}>
                         <DeleteRoundedIcon />
                     </IconButton>
                 </Box>
-                <Box>
-                    <ColorButtonSolidOrange variant='contained' size='small' startIcon={<PersonAddAltRoundedIcon />}>Add {props.table}</ColorButtonSolidOrange>
+                <Box sx={{ marginRight: '4px' }}>
+                    <ColorButtonSolidOrange variant='contained' size='small' startIcon={<PersonAddAltRoundedIcon />} onClick={() => setDrawer(true)}>Add {props.table}</ColorButtonSolidOrange>
                 </Box>
             </Box>
             <DataGrid
@@ -92,7 +95,10 @@ const DataTable = (props) => {
                 onStateChange={(e) => setSelectedRows(e.selection)}
                 sx={{
                     backdropFilter: 'blur(3px)',
-                    borderRadius: '8px',
+                    borderTopLeftRadius: '0px',
+                    borderTopRightRadius: '0px',
+                    borderBottomLeftRadius: '8px',
+                    borderBottomRightRadius: '8px',
                     '.MuiDataGrid-checkboxInput': {
                         color: purple[700],
                         '&.Mui-checked': {
@@ -126,6 +132,9 @@ const DataTable = (props) => {
                     }
                 }}
             />
+            <Drawer anchor='right' open={drawer} onBackdropClick={() => setDrawer(false)}>
+                <RegistrationForm role={props.table} />
+            </Drawer>
         </Box>
     )
 }
