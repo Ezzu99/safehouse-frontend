@@ -132,8 +132,8 @@ const DataTable = (props) => {
                     }
                 }}
             />
-            <Drawer anchor='right' open={drawer} onBackdropClick={() => setDrawer(false)}>
-                <RegistrationForm role={props.table} />
+            <Drawer anchor='right' open={drawer} onBackdropClick={() => setDrawer(false)} sx={{ backdropFilter: 'blur(1px)', filter: 'none' }}>
+                <RegistrationForm role={props.table} setDrawer={setDrawer} />
             </Drawer>
         </Box>
     )

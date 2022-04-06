@@ -17,7 +17,7 @@ const ColorButtonOutlinedPurple = styled(Button)(({ theme }) => ({
     backgroundColor: 'transparent',
     border: `1px solid ${purple[700]}`,
     '&:hover': {
-        backgroundColor: '#6a1b9a20',
+        backgroundColor: '#6a1b9aaa',
         outline: 'none',
         border: `1px solid ${purple[800]}`
     },
@@ -33,4 +33,16 @@ const ColorButtonSolidOrange = styled(Button)(({ theme }) => ({
     textTransform: 'capitalize',
 }));
 
-export { ColorButtonSolidPurple, ColorButtonOutlinedPurple, ColorButtonSolidOrange };
+const ColorButtonOutlinedOrange = styled(Button)(({ theme }) => ({
+    color: orange[600],
+    border: `1px solid ${orange[600]}`,
+    backgroundColor: 'transparent',
+    '&:hover': {
+        backgroundColor: '#ffe0b2aa',
+        outline: 'none',
+        border: `1px solid ${orange[800]}`
+    },
+    textTransform: 'capitalize',
+}));
+
+export { ColorButtonSolidPurple, ColorButtonOutlinedPurple, ColorButtonSolidOrange, ColorButtonOutlinedOrange };

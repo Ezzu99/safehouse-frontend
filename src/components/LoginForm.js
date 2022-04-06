@@ -2,10 +2,11 @@ import * as React from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Link from '@mui/material/Link';
-import { Typography, TextField, Checkbox, Snackbar } from "@mui/material";
+import { Typography, Checkbox, Snackbar } from "@mui/material";
 import MuiAlert from '@mui/material/Alert';
 import { Box } from "@mui/system";
 import { purple } from '@mui/material/colors';
+import CustomTextField from './CustomTextField';
 import { ColorButtonSolidOrange } from './ColorButton';
 
 let instance = axios.create({
@@ -112,8 +113,8 @@ const LoginForm = () => {
     return (
         <Box sx={{ height: '400px' }}>
             <Box sx={{ width: '400px', padding: '18px', bgcolor: 'white', borderRadius: '12px', boxShadow: '0 4px 18px #ccc', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <TextField id="outlined-basic" label="Username" variant="outlined" value={username} onChange={(e) => { setUsername(e.target.value) }} />
-                <TextField id="outlined-basic" label="Password" type='password' variant="outlined" value={password} onChange={(e) => { setPassword(e.target.value) }}/>
+                <CustomTextField id="outlined-basic" label="Username" variant="outlined" value={username} onChange={(e) => { setUsername(e.target.value) }} />
+                <CustomTextField id="outlined-basic" label="Password" type='password' variant="outlined" value={password} onChange={(e) => { setPassword(e.target.value) }}/>
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
                     <Checkbox checked={selected} onClick={() => { setSelected(!selected) }} sx={{ '&.Mui-checked': {color: purple[700]} }} />
                     <Typography sx={{ color: 'gray' }} onClick={() => { setSelected(!selected) }}>Remember me</Typography>
