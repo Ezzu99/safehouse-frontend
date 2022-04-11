@@ -67,16 +67,15 @@ const DataTable = (props) => {
     return (
         <Box sx={{ 
                 width: '100%',
-                height: '90vh',
+                height: '92vh',
                 paddingX: '46px',
-                paddingTop: '60px',
                 position: 'relative',
                 zIndex: '10',
                 display: 'flex',
                 flexDirection: 'column'
             }}
         >
-            <Box sx={{ padding: '6px', border: 'none', borderTop: 1, borderRight: 1, borderLeft: 1, borderColor: 'divider', borderTopRightRadius: '8px', borderTopLeftRadius: '8px', backdropFilter: 'blur(3px)', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Box sx={{ marginTop: '104px', padding: '6px', border: 'none', borderTop: 1, borderRight: 1, borderLeft: 1, borderColor: 'divider', borderTopRightRadius: '8px', borderTopLeftRadius: '8px', backdropFilter: 'blur(3px)', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <IconButton disabled={disable} onClick={deleteRows}>
                         <DeleteRoundedIcon />
@@ -110,13 +109,13 @@ const DataTable = (props) => {
                     },
                     '.MuiDataGrid-row': {
                         '&:hover': {
-                            bgcolor: orange[200]+'95'
+                            bgcolor: orange[800]+'20'
                         },
                         '&.Mui-selected': {
-                            bgcolor: orange[200]+'9a'
+                            bgcolor: orange[800]+'20'
                         },
                         '&.Mui-selected:hover': {
-                            bgcolor: orange[200]+'85'
+                            bgcolor: orange[800]+'10'
                         },
                     },
                     '.MuiDataGrid-selectedRowCount': {

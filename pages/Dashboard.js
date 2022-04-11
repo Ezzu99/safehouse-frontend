@@ -69,7 +69,7 @@ const Sidebar = () => {
                         <Typography variant="h4" color={purple[600]} sx={{ fontWeight: 'bold' }}>SafeHouse</Typography>
                     </ThemeProvider>
                 </Box>
-                <Box sx={{ marginTop: '12px', marginBottom: '28px', marginX: '24px', paddingX: '22px', paddingY: '20px', bgcolor: orange[100], borderRadius: '8px' }}>
+                <Box sx={{ marginTop: '12px', marginBottom: '28px', marginX: '24px', paddingX: '22px', paddingY: '20px', bgcolor: orange[800]+'20', borderRadius: '8px' }}>
                     <Typography variant='body1' color={orange[600]} sx={{ fontWeight: 'bold' }}>{name}</Typography>
                 </Box>
                 {

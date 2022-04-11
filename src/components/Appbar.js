@@ -20,9 +20,9 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const Appbar = () => {
     return (
-        <Box sx={{ paddingX: '46px', paddingY: '12px', backdropFilter: 'blur(14px)', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-            <Box sx={{ width: '270px', paddingX: '12px', paddingTop: '8px', paddingBottom: '6px', borderRadius: '8px', bgcolor: 'divider', backdropFilter: 'blur(24px)', display: 'flex', alignItems: 'flex-end' }}>
-                <SearchRoundedIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+        <Box sx={{ paddingX: '46px', paddingY: '22px', bgcolor: '#ffffff50', backdropFilter: 'blur(14px)', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+            <Box sx={{ width: '270px', paddingX: '12px', paddingY: '8px', borderRadius: '8px', bgcolor: 'divider', backdropFilter: 'blur(24px)', display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+                <SearchRoundedIcon sx={{ color: '#555', mr: 1 }} />
                 <InputBase id="input-with-sx" placeholder="Search" variant="standard" color="secondary"/>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '8px' }}>
