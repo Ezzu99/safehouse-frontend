@@ -30,48 +30,54 @@ const GraphingComponent = () => {
             <Box sx={{ flexGrow: 1, paddingTop: '12px', paddingBottom: '80px' }}>
                 <Grid container spacing={2}>
                     <Grid item xs={8}>
-                        <Item sx={{ bgcolor: 'transparent', backdropFilter: 'blur(4px)' }}>
-                            <Box sx={{ height: '370px', padding: '12px', bgcolor: purple[800]+'20', borderRadius: '8px' }}>
-                                <Typography variant='h6' fontWeight='bold' sx={{ paddingX: '6px', color: purple[700], position: 'absolute', zIndex: 10 }}>Jobs</Typography>
-                                <CustomBarChart />
+                        <Item sx={{ bgcolor: 'transparent', backdropFilter: 'blur(10px)', boxShadow: '0 10px 18px #dedede' }}>
+                            <Box sx={{ height: '370px', padding: '12px', bgcolor: purple[800]+'20', borderRadius: '8px', display: 'flex', flexDirection: 'column' }}>
+                                <Typography variant='h6' fontWeight='bold' sx={{ paddingX: '6px', color: purple[700], textAlign: 'left' }}>Jobs</Typography>
+                                <Box sx={{ flexGrow: 1 }}>
+                                    <CustomBarChart />
+                                </Box>
                             </Box>
                         </Item>
                     </Grid>
                     <Grid item xs={4}>
-                        <Item sx={{ bgcolor: 'transparent', backdropFilter: 'blur(4px)' }}>
-                            <Box sx={{ height: '370px', padding: '12px', bgcolor: orange[800]+'20', borderRadius: '8px' }}>
-                                <Typography variant='h6' fontWeight='bold' sx={{ paddingX: '6px', color: orange[700], position: 'absolute', zIndex: 10 }}>Courses</Typography>
-                                <CustomPieChart />
+                        <Item sx={{ bgcolor: 'transparent', backdropFilter: 'blur(10px)', boxShadow: '0 10px 18px #dedede' }}>
+                            <Box sx={{ height: '370px', padding: '12px', bgcolor: orange[800]+'20', borderRadius: '8px', display: 'flex', flexDirection: 'column' }}>
+                                <Typography variant='h6' fontWeight='bold' sx={{ paddingX: '6px', color: orange[700], textAlign: 'left' }}>Courses</Typography>
+                                <Box sx={{ flexGrow: 1 }}>
+                                    <CustomPieChart />
+                                </Box>
                             </Box>
                         </Item>
                     </Grid>
                     <Grid item xs={12}>
-                        <Item sx={{ bgcolor: 'transparent', backdropFilter: 'blur(4px)' }}>
-                            <Box sx={{ height: '340px', padding: '12px', bgcolor: orange[800]+'20', borderRadius: '8px' }}>
-                                <Box sx={{ width: '97.5%', paddingX: '6px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', position: 'absolute', zIndex: 10 }}>
+                        <Item sx={{ bgcolor: 'transparent', backdropFilter: 'blur(10px)', boxShadow: '0 10px 18px #dedede' }}>
+                            <Box sx={{ height: '340px', padding: '12px', bgcolor: orange[800]+'20', borderRadius: '8px', display: 'flex', flexDirection: 'column' }}>
+                                <Box sx={{ paddingX: '6px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <Typography variant='h6' fontWeight='bold' sx={{ color: orange[700] }}>Users</Typography>
                                     <Typography variant='h6' fontWeight='bold' sx={{ color: orange[700] }}>14500 Current users</Typography>
                                 </Box>
-                                <CustomLineGraph />
+                                <Box sx={{ flexGrow: 1 }}>
+                                    <CustomLineGraph />
+                                </Box>
                             </Box>
                         </Item>
                     </Grid>
                     <Grid item xs={4}>
-                        <Item sx={{ bgcolor: 'transparent', backdropFilter: 'blur(4px)' }}>
+                        <Item sx={{ bgcolor: 'transparent', backdropFilter: 'blur(10px)', boxShadow: '0 10px 18px #dedede' }}>
                             <Box sx={{ height: '240px', padding: '12px', bgcolor: purple[800]+'20', borderRadius: '8px' }}>
 
                             </Box>
                         </Item>
                     </Grid>
                     <Grid item xs={4}>
-                        <Item sx={{ bgcolor: 'transparent', backdropFilter: 'blur(4px)' }}>
+                        <Item sx={{ bgcolor: 'transparent', backdropFilter: 'blur(10px)', boxShadow: '0 10px 18px #dedede' }}>
                             <Box sx={{ height: '240px', padding: '12px', bgcolor: purple[800]+'20', borderRadius: '8px' }}>
 
                             </Box>
                         </Item>
                     </Grid>
                     <Grid item xs={4}>
-                        <Item sx={{ bgcolor: 'transparent', backdropFilter: 'blur(4px)' }}>
+                        <Item sx={{ bgcolor: 'transparent', backdropFilter: 'blur(10px)', boxShadow: '0 10px 18px #dedede' }}>
                             <Box sx={{ height: '240px', padding: '12px', bgcolor: purple[800]+'20', borderRadius: '8px' }}>
 
                             </Box>
