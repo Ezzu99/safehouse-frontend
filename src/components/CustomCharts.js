@@ -219,7 +219,7 @@ const CustomPieChart = () => {
         <ResponsiveContainer width="100%" height="100%" >
             <PieChart>
                 <Tooltip allowEscapeViewBox={{ y: false, x: false }} content={<CustomPieTooltip />} />
-                <Pie activeIndex={activeIndex} activeShape={renderActiveShape} data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100} innerRadius={60} paddingAngle={3} fill={orange[600]} onMouseEnter={onPieEnter} onMouseLeave={onPieLeave} />
+                <Pie activeIndex={activeIndex} activeShape={renderActiveShape} data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" stroke="none" outerRadius={100} innerRadius={60} paddingAngle={3} fill={orange[600]} onMouseEnter={onPieEnter} onMouseLeave={onPieLeave} />
             </PieChart>
         </ResponsiveContainer>
     );
