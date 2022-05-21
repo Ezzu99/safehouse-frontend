@@ -1,60 +1,49 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box, Drawer } from "@mui/material";
+import { Box, Button, Drawer } from "@mui/material";
 import { purple, orange } from '@mui/material/colors';
 import IconButton from '@mui/material/IconButton';
 import { ColorButtonSolidOrange } from './ColorButton';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 import RegistrationForm from './RegistrationForm';
+import SendIcon from '@mui/icons-material/Send';
+import WorkshopForm from './WorkshopForm';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
     {
-      field: 'firstName',
-      headerName: 'First name',
+      field: 'name',
+      headerName: 'Workshop',
       width: 150,
       editable: false,
     },
     {
-      field: 'lastName',
-      headerName: 'Last name',
+      field: 'instructor',
+      headerName: 'Instructor Name',
       width: 150,
       editable: false,
     },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 110,
+      field: 'description',
+      headerName: 'Description',
+      width: 710,
       editable: false,
     }
 ];
 
 const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: 22 },
-    { id: 6, lastName: 'Melisandre', firstName: 'Alex', age: 15 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 10, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 11, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 12, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 13, lastName: 'Targaryen', firstName: 'Daenerys', age: 22 },
-    { id: 14, lastName: 'Melisandre', firstName: 'Alex', age: 15 },
-    { id: 15, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 16, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 17, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+    { id: 1, name: 'Data Science', instructor: 'Jon', description: 'Master data science, Python & SQL, analyze & visualize data, build machine learning models' },
+    { id: 2, name: 'Data Science', instructor: 'Cersei', description: 'Master data science, Python & SQL, analyze & visualize data, build machine learning models' },
+    { id: 3, name: 'Data Science', instructor: 'Jaime', description: 'Master data science, Python & SQL, analyze & visualize data, build machine learning models' },
+    { id: 4, name: 'Data Science', instructor: 'Arya', description: 'Master data science, Python & SQL, analyze & visualize data, build machine learning models' }
 ];
 
-const DataTable = (props) => {
+const AvailableWorkshopTable = (props) => {
     const [disable, setDisable] = React.useState(false);
     const [selectedRows, setSelectedRows] = React.useState([]);
     const [drawer, setDrawer] = React.useState(false);
+    const [role, setrole] = React.useState();
 
     const deleteRows = (e) => {
         console.log(selectedRows);
@@ -62,28 +51,35 @@ const DataTable = (props) => {
 
     React.useEffect(() => {
         selectedRows.length == 0 ? setDisable(true) : setDisable(false);
+        setrole(localStorage.getItem('role'));
     }, [selectedRows]);
 
     return (
         <Box sx={{ 
                 width: '100%',
-                height: '92vh',
-                paddingX: '46px',
+                height: '75vh',
                 position: 'relative',
                 zIndex: '10',
                 display: 'flex',
                 flexDirection: 'column'
             }}
         >
-            <Box sx={{ marginTop: '104px', padding: '6px', border: 'none', borderTop: 1, borderRight: 1, borderLeft: 1, borderColor: 'divider', borderTopRightRadius: '8px', borderTopLeftRadius: '8px', backdropFilter: 'blur(8px)', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Box sx={{ padding: '6px', border: 'none', borderTop: 1, borderRight: 1, borderLeft: 1, borderColor: 'divider', borderTopRightRadius: '8px', borderTopLeftRadius: '8px', backdropFilter: 'blur(8px)', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <IconButton disabled={disable} onClick={deleteRows}>
-                        <DeleteRoundedIcon />
-                    </IconButton>
+                    {
+                        (role != 'homeless') ?
+                        <IconButton disabled={disable} onClick={deleteRows}>
+                            <DeleteRoundedIcon />
+                        </IconButton> :
+                        <Button color='secondary' disabled={disable} startIcon={<SendIcon />} sx={{ margin: '3.5px' }}>Enroll</Button>
+                    }
                 </Box>
-                <Box sx={{ marginRight: '4px' }}>
-                    <ColorButtonSolidOrange variant='contained' size='small' startIcon={<PersonAddAltRoundedIcon />} onClick={() => setDrawer(true)}>Add {props.table}</ColorButtonSolidOrange>
-                </Box>
+                    {
+                        (role != 'homeless') ?
+                        <Box sx={{ marginRight: '4px' }}>
+                            <ColorButtonSolidOrange variant='contained' size='small' startIcon={<PersonAddAltRoundedIcon />} onClick={() => setDrawer(true)}>Add Workshop</ColorButtonSolidOrange>
+                        </Box> : null
+                    }
             </Box>
             <DataGrid
                 rows={rows}
@@ -132,10 +128,10 @@ const DataTable = (props) => {
                 }}
             />
             <Drawer anchor='right' open={drawer} onBackdropClick={() => setDrawer(false)} sx={{ backdropFilter: 'blur(1px)', filter: 'none' }}>
-                <RegistrationForm role={props.table} setDrawer={setDrawer} />
+                <WorkshopForm setDrawer={setDrawer}/>
             </Drawer>
         </Box>
     )
 }
 
-export default DataTable;
+export default AvailableWorkshopTable;

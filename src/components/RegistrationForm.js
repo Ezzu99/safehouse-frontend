@@ -80,8 +80,8 @@ const RegistrationForm = (props) => {
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: '12px' }}>
                     <FormControl>
-                        <InputLabel id="demo-simple-select-standard-label" color="secondary">Gender</InputLabel>
-                        <Select labelId="demo-simple-select-standard-label" sx={{ width: '130px', backdropFilter: 'blur(6px)' }} color="secondary" label="Gender" value={gender} onChange={(e) => setGender(e.target.value)}>
+                        <InputLabel color="secondary">Gender</InputLabel>
+                        <Select sx={{ width: '130px', backdropFilter: 'blur(10px)', '&:hover': { '&& fieldset': { borderColor: purple[600] } } }} MenuProps={{ PaperProps: { sx: { '& .MuiMenuItem-root.Mui-selected': { backgroundColor: purple[100] } } } }} color="secondary" label="Gender" value={gender} onChange={(e) => setGender(e.target.value)}>
                             <MenuItem value='male'>Male</MenuItem>
                             <MenuItem value='female'>Female</MenuItem>
                             <MenuItem value='other'>Other</MenuItem>
@@ -91,8 +91,8 @@ const RegistrationForm = (props) => {
                 </Box>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <ColorButtonSolidOrange fullWidth onClick={submitForm}>Register</ColorButtonSolidOrange>
-                <ColorButtonOutlinedOrange fullWidth onClick={() => props.setDrawer(false)}>Cancel</ColorButtonOutlinedOrange>
+                <ColorButtonSolidOrange size='large' fullWidth onClick={submitForm}>Register</ColorButtonSolidOrange>
+                <ColorButtonOutlinedOrange size='medium' fullWidth onClick={() => props.setDrawer(false)}>Cancel</ColorButtonOutlinedOrange>
             </Box>
             <Snackbar open={openAlertSnack} autoHideDuration={autoHideDuration} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>

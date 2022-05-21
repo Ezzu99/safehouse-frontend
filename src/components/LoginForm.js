@@ -68,7 +68,7 @@ const LoginForm = () => {
                         role: 'ngo',
                         username: 'ezaan1999',
                         id: '1',
-                        name: 'Dar-Ul-Sakoon',
+                        name: 'Azan Ali',
                         email: 'ezaan1999.ali@gmail.com'
                     }
                 }
@@ -81,7 +81,7 @@ const LoginForm = () => {
                 setName(res.data.name);
                 setEmail(res.data.email);
                 
-                router.push('/Dashboard');
+                router.replace('/Dashboard');
             }
             catch (e) {
                 setOpenErrorSnack(true);
@@ -112,7 +112,7 @@ const LoginForm = () => {
 
     return (
         <Box sx={{ height: '400px' }}>
-            <Box sx={{ width: '400px', padding: '18px', bgcolor: '#ffffffaa', backdropFilter: 'blur(4px)', borderRadius: '12px', boxShadow: '0 4px 18px #ccc', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <Box sx={{ width: '400px', padding: '18px', bgcolor: '#ffffff20', backdropFilter: 'blur(10px)', borderRadius: '12px', boxShadow: '0 4px 18px #ccc', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <CustomTextField id="outlined-basic" label="Username" variant="outlined" value={username} onChange={(e) => { setUsername(e.target.value) }} />
                 <CustomTextField id="outlined-basic" label="Password" type='password' variant="outlined" value={password} onChange={(e) => { setPassword(e.target.value) }}/>
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>

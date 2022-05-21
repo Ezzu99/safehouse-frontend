@@ -6,7 +6,7 @@ import * as React from "react";
 const CustomBarTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         return (
-            <Box sx={{ width: '140px', padding: '12px', bgcolor: '#FFFFFFee', borderRadius: '6px', boxShadow: '0 0 18px #33333350', display: 'flex', flexDirection: 'column' }} >
+            <Box sx={{ width: '140px', padding: '12px', bgcolor: '#FFFFFF', borderRadius: '6px', boxShadow: '0 10px 18px #33333350', display: 'flex', flexDirection: 'column' }} >
                 <Box>
                     <Typography sx={{ color: purple[600] }} >{payload[0].payload.month}</Typography>
                 </Box>
@@ -28,7 +28,7 @@ const CustomBarTooltip = ({ active, payload, label }) => {
 const CustomPieTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         return (
-            <Box sx={{ padding: '12px', bgcolor: '#FFFFFFee', borderRadius: '6px', boxShadow: '0 0 18px #33333350' }} >
+            <Box sx={{ padding: '12px', bgcolor: '#FFFFFF', borderRadius: '6px', boxShadow: '0 10px 18px #33333350' }} >
                 <Typography sx={{ color: '#555' }} >{payload[0].name}: {payload[0].value}</Typography>
             </Box>
         );
@@ -41,7 +41,7 @@ const CustomLineTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         console.log(payload)
         return (
-            <Box sx={{ width: '170px', padding: '12px', bgcolor: '#FFFFFFee', borderRadius: '6px', boxShadow: '0 0 18px #33333350', display: 'flex', flexDirection: 'column' }} >
+            <Box sx={{ width: '170px', padding: '12px', bgcolor: '#FFFFFF', borderRadius: '6px', boxShadow: '0 10px 18px #33333350', display: 'flex', flexDirection: 'column' }} >
                 <Box>
                     <Typography sx={{ color: orange[600] }} >{payload[0].payload.month}</Typography>
                 </Box>

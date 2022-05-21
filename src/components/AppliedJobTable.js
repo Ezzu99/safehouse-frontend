@@ -6,33 +6,32 @@ import IconButton from '@mui/material/IconButton';
 import { ColorButtonSolidOrange } from './ColorButton';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
-import RegistrationForm from './RegistrationForm';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
     {
       field: 'firstName',
-      headerName: 'First name',
+      headerName: 'Job',
       width: 150,
       editable: false,
     },
     {
       field: 'lastName',
-      headerName: 'Last name',
+      headerName: 'Instructor Name',
       width: 150,
       editable: false,
     },
     {
       field: 'age',
-      headerName: 'Age',
+      headerName: 'Remaining Period (days)',
       type: 'number',
-      width: 110,
+      width: 180,
       editable: false,
     }
 ];
 
 const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
+    { id: 1, lastName: 'White', firstName: 'John', age: 35 },
     { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
     { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
     { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
@@ -51,10 +50,11 @@ const rows = [
     { id: 17, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
-const DataTable = (props) => {
+const AppliedJobTable = (props) => {
     const [disable, setDisable] = React.useState(false);
     const [selectedRows, setSelectedRows] = React.useState([]);
     const [drawer, setDrawer] = React.useState(false);
+    const [role, setrole] = React.useState();
 
     const deleteRows = (e) => {
         console.log(selectedRows);
@@ -62,29 +62,29 @@ const DataTable = (props) => {
 
     React.useEffect(() => {
         selectedRows.length == 0 ? setDisable(true) : setDisable(false);
+        setrole(localStorage.getItem('role'));
     }, [selectedRows]);
 
     return (
         <Box sx={{ 
                 width: '100%',
-                height: '92vh',
-                paddingX: '46px',
+                height: '75vh',
                 position: 'relative',
                 zIndex: '10',
                 display: 'flex',
                 flexDirection: 'column'
             }}
         >
-            <Box sx={{ marginTop: '104px', padding: '6px', border: 'none', borderTop: 1, borderRight: 1, borderLeft: 1, borderColor: 'divider', borderTopRightRadius: '8px', borderTopLeftRadius: '8px', backdropFilter: 'blur(8px)', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <IconButton disabled={disable} onClick={deleteRows}>
-                        <DeleteRoundedIcon />
-                    </IconButton>
-                </Box>
-                <Box sx={{ marginRight: '4px' }}>
-                    <ColorButtonSolidOrange variant='contained' size='small' startIcon={<PersonAddAltRoundedIcon />} onClick={() => setDrawer(true)}>Add {props.table}</ColorButtonSolidOrange>
-                </Box>
-            </Box>
+            {
+                (role != 'homeless') ?
+                <Box sx={{ padding: '6px', border: 'none', borderTop: 1, borderRight: 1, borderLeft: 1, borderColor: 'divider', borderTopRightRadius: '8px', borderTopLeftRadius: '8px', backdropFilter: 'blur(8px)', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <IconButton disabled={disable} onClick={deleteRows}>
+                            <DeleteRoundedIcon />
+                        </IconButton>
+                    </Box>
+                </Box> : null
+            }
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -94,8 +94,8 @@ const DataTable = (props) => {
                 onStateChange={(e) => setSelectedRows(e.selection)}
                 sx={{
                     backdropFilter: 'blur(8px)',
-                    borderTopLeftRadius: '0px',
-                    borderTopRightRadius: '0px',
+                    borderTopLeftRadius: (role != 'homeless') ? '0px' : '8px',
+                    borderTopRightRadius: (role != 'homeless') ? '0px' : '8px',
                     borderBottomLeftRadius: '8px',
                     borderBottomRightRadius: '8px',
                     '.MuiDataGrid-checkboxInput': {
@@ -131,11 +131,8 @@ const DataTable = (props) => {
                     }
                 }}
             />
-            <Drawer anchor='right' open={drawer} onBackdropClick={() => setDrawer(false)} sx={{ backdropFilter: 'blur(1px)', filter: 'none' }}>
-                <RegistrationForm role={props.table} setDrawer={setDrawer} />
-            </Drawer>
         </Box>
     )
 }
 
-export default DataTable;
+export default AppliedJobTable;

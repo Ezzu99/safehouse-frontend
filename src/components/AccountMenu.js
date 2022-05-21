@@ -33,8 +33,6 @@ export default function AccountMenu() {
   };
 
   const logout = () => {
-    router.push('/');
-
     localStorage.setItem('name', '');
     localStorage.setItem('email', '');
     localStorage.setItem('token', '');
@@ -42,6 +40,8 @@ export default function AccountMenu() {
     localStorage.setItem('role', '');
     localStorage.setItem('id', '');
     localStorage.setItem('loggedIn', false);
+
+    router.replace('/');
   }
 
   return (

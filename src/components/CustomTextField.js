@@ -16,7 +16,7 @@ const CustomTextField = styled(TextField)({
         borderColor: purple[600],
         },
     },
-    backdropFilter: 'blur(6px)'
+    backdropFilter: 'blur(10px)'
 });
 
 export default CustomTextField;
