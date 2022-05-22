@@ -11,7 +11,7 @@ import { ColorButtonOutlinedPurple, ColorButtonSolidPurple } from '../src/compon
 const Index = () => {
   return (
     <Box sx={{ height: '100vh', width: '100%', bgcolor: 'white', display: 'flex', flexDirection: 'row', gap: '120px', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', position: 'absolute', top: '0', left: '0', zIndex: '10' }}>
-      <Box className={styles.bgimage}></Box>
+      <Box className={[styles.bgimage, styles.bgimage1]}></Box>
       <Box sx={{ height: '400px' }}>
         <Box sx={{ width: '550px', marginTop: '18px' }}>
           <ThemeProvider theme={HeadingFont}>

@@ -13,4 +13,22 @@ a {
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.css-19kzrtu {
+  margin: 0;
+  padding: 0;
+}
+
+.css-1js84u3 {
+  width: 100%;
+  height: 0px;
+  position: relative;
+  z-index: 15;
 }
