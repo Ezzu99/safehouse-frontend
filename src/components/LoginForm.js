@@ -52,7 +52,7 @@ const LoginForm = () => {
             setOpenAlertSnack(true);
         }
         else if (!password.match(regex)) {
-            setSeverity('error');
+            setSeverity('warning');
             setAlertMessage('Invalid username or password!');
             setOpenAlertSnack(true);
         }

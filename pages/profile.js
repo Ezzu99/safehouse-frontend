@@ -41,12 +41,12 @@ const profile = () => {
                 <Box sx={{ width: '100vw', height: '150px', paddingX: '52px', boxShadow: '0px 0 24px -4px #dedede', display: 'flex', flexDirection: 'row' }}>
                     <Box sx={{ width: '300px', height: '200px', bgcolor: 'white', backgroundImage: `url(${profileImage})`, backgroundPosition: 'center', backgroundSize: 'cover', border: '2px solid #dedede', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', top: '80px', overflow: 'hidden' }}></Box>
                     <Box sx={{ width: '100%', marginLeft: '24px', display: 'flex', flexDirection: 'column', position: 'relative', top: '85px' }}>
-                        <Typography variant='body' color='#777'>{username}</Typography>
+                        <Typography variant='body' color='#777'>@{username}</Typography>
                         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                             <ThemeProvider theme={HeadingFont}>
                                 <Typography variant='h4' color='#555'>{name}</Typography>
                             </ThemeProvider>
-                            <Box suppressHydrationWarning={true} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <Box suppressHydrationWarning={true} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px' }}>
                                 { process.browser && <PDFDownloadLink document={<Portfolio name={name} email={email} phoneNum={phone} courses={[]} jobs={[]} />} fileName={`${name.replace(/\s/g, '-')}.pdf`}>
                                     {({ loading }) => loading ? <ColorButtonTextGray startIcon={<PostAddIcon />} sx={{ position: 'relative', top: '-8px' }}>Loading...</ColorButtonTextGray> : <ColorButtonTextGray startIcon={<PostAddIcon />} sx={{ position: 'relative', top: '-8px' }}>Download Portfolio</ColorButtonTextGray>}
                                     </PDFDownloadLink>

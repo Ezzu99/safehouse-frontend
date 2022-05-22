@@ -98,7 +98,6 @@ const AppliedJobTable = (props) => {
                 columns={columns}
                 rowsPerPageOptions={[5]}
                 autoPageSize
-                checkboxSelection
                 onStateChange={(e) => setSelectedRows(e.selection)}
                 sx={{
                     backdropFilter: 'blur(8px)',
@@ -127,7 +126,7 @@ const AppliedJobTable = (props) => {
                         },
                     },
                     '.MuiDataGrid-selectedRowCount': {
-                        color: purple[700]
+                        color: 'transparent'
                     },
                     '.MuiDataGrid-filterIcon': {
                         color: orange[700]

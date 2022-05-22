@@ -16,8 +16,11 @@ import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import WorkIcon from '@mui/icons-material/Work';
+import FactCheckIcon from '@mui/icons-material/FactCheck';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import WorkshopPortal from '../src/components/WorkshopPortal';
 import JobPortal from '../src/components/JobPortal';
+import NgoTable from '../src/components/NgoTable';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -143,8 +146,8 @@ const Sidebar = () => {
                         onChange={handleChange}
                         sx={{ flexGrow: 1 }}
                     >
-                        <Tab label="NGOs" icon={<AssignmentTurnedInIcon fontSize='small'sx={{ marginTop: '4px' }}/>} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(0)} />
-                        <Tab label="Affiliation Requests" icon={<WorkIcon fontSize='small'sx={{ marginTop: '4px' }}/>} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(1)} />
+                        <Tab label="NGOs" icon={<ListAltIcon fontSize='small'sx={{ marginTop: '4px' }}/>} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(0)} />
+                        <Tab label="Affiliation Requests" icon={<FactCheckIcon fontSize='small'sx={{ marginTop: '4px' }}/>} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(1)} />
                     </Tabs> :
                     null
                 }
@@ -158,14 +161,18 @@ const Sidebar = () => {
                     {
                         (role == 'ngo') ?
                         <GraphingComponent /> :
-                        <WorkshopPortal />
+                        (role == 'homeless' || role == 'lister') ?
+                        <WorkshopPortal /> :
+                        <NgoTable acceptRequests={false}/>
                     }
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     {
                         (role == 'ngo') ?
                         <DataTable table='user'/> :
-                        <JobPortal />
+                        (role == 'homeless' || role == 'lister') ?
+                        <JobPortal /> :
+                        <NgoTable acceptRequests={true}/>
                     }
                 </TabPanel>
                 <TabPanel value={value} index={2}>

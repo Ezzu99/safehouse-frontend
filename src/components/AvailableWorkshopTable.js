@@ -7,7 +7,6 @@ import IconButton from '@mui/material/IconButton';
 import { ColorButtonSolidOrange } from './ColorButton';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
-import RegistrationForm from './RegistrationForm';
 import SendIcon from '@mui/icons-material/Send';
 import WorkshopForm from './WorkshopForm';
 

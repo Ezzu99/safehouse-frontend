@@ -17,12 +17,14 @@ export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
+  const [role, setRole] = React.useState('');
   const open = Boolean(anchorEl);
   let router = useRouter();
 
   React.useEffect(() => {
       setName(localStorage.getItem('name'));
       setEmail(localStorage.getItem('email'));
+      setRole(localStorage.getItem('role'));
   }, []);
 
   const handleClick = (event) => {
@@ -101,12 +103,15 @@ export default function AccountMenu() {
           <Typography variant='body' sx={{ paddingX: '18px', paddingBottom: '6px', color: '#999', }}>{email}</Typography>
         </Box>
         <Divider />
-        <MenuItem onClick={() => router.push('/profile')}>
-          <ListItemIcon>
-            <PersonIcon fontSize="small" />
-          </ListItemIcon>
-          Profile
-        </MenuItem>
+        {
+          (role != 'admin') ?
+          <MenuItem onClick={() => router.push('/profile')}>
+            <ListItemIcon>
+              <PersonIcon fontSize="small" />
+            </ListItemIcon>
+            Profile
+          </MenuItem> : null
+        }
         <MenuItem>
           <ListItemIcon>
             <Settings fontSize="small" />
