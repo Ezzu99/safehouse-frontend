@@ -2,6 +2,24 @@ import { Button } from "@mui/material";
 import { purple, orange } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 
+const ColorButtonTextPurple = styled(Button)(({ theme }) => ({
+    color: purple[700],
+    backgroundColor: 'transparent',
+    textTransform: 'capitalize',
+}));
+
+const ColorButtonTextOrange = styled(Button)(({ theme }) => ({
+    color: orange[600],
+    backgroundColor: 'transparent',
+    textTransform: 'capitalize',
+}));
+
+const ColorButtonTextGray = styled(Button)(({ theme }) => ({
+    color: 'gray',
+    backgroundColor: 'transparent',
+    textTransform: 'capitalize',
+}));
+
 const ColorButtonSolidPurple = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(purple[700]),
     backgroundImage: `linear-gradient(90deg, ${purple[500]}, ${purple[700]})`,
@@ -47,4 +65,4 @@ const ColorButtonOutlinedOrange = styled(Button)(({ theme }) => ({
     textTransform: 'capitalize',
 }));
 
-export { ColorButtonSolidPurple, ColorButtonOutlinedPurple, ColorButtonSolidOrange, ColorButtonOutlinedOrange };
+export { ColorButtonTextPurple, ColorButtonTextOrange, ColorButtonTextGray, ColorButtonSolidPurple, ColorButtonOutlinedPurple, ColorButtonSolidOrange, ColorButtonOutlinedOrange };
