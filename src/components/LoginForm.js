@@ -27,12 +27,12 @@ const LoginForm = () => {
     const [password, setPassword] = React.useState('');
     const [selected, setSelected] = React.useState(false);
     const [disableLogin, setDisableLogin] = React.useState(false);
-    const [openErrorSnack, setOpenErrorSnack] = React.useState(false);
     const [openAlertSnack, setOpenAlertSnack] = React.useState(false);
     const [alertMessage, setAlertMessage] = React.useState('Enter username and password!');
-    const [autoHideDuration, setAutoHideDuration] = React.useState(6000);
+    const [severity, setSeverity] = React.useState('warning');
     const [userid, setUserid] = React.useState('');
     const [name, setName] = React.useState('');
+    const [ngo, setNgo] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [loggedIn, setLoggedIn] = React.useState(false);
     const [token, setToken] = React.useState('');
@@ -45,13 +45,13 @@ const LoginForm = () => {
         var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
         if (username == '' | password == '') {
-            setAutoHideDuration(6000);
-            setAlertMessage('Enter username and password!')
+            setSeverity('warning');
+            setAlertMessage('Enter username and password!');
             setOpenAlertSnack(true);
         }
         else if (!password.match(regex)) {
-            setAutoHideDuration(10000);
-            setAlertMessage('Password must contain 6 to 20 characters, at least 1 numeric digit, and at least 1 uppercase and lowercase letter!')
+            setSeverity('error');
+            setAlertMessage('Invalid username or password!');
             setOpenAlertSnack(true);
         }
         else {
@@ -69,6 +69,7 @@ const LoginForm = () => {
                         username: 'ezaan1999',
                         id: '1',
                         name: 'Azan Ali',
+                        ngo: 'Dar-Ul-Sakoon',
                         email: 'ezaan1999.ali@gmail.com'
                     }
                 }
@@ -80,11 +81,14 @@ const LoginForm = () => {
                 setUserid(res.data.id);
                 setName(res.data.name);
                 setEmail(res.data.email);
+                setNgo(res.data.ngo);
                 
                 router.replace('/Dashboard');
             }
             catch (e) {
-                setOpenErrorSnack(true);
+                setSeverity('error');
+                setAlertMessage('Invalid username or password!');
+                setOpenAlertSnack(true);
             }
         }
 
@@ -99,14 +103,14 @@ const LoginForm = () => {
         localStorage.setItem('id', userid);
         localStorage.setItem('name', name);
         localStorage.setItem('email', email);
-    }, [loggedIn, token, role, username, userid, email])
+        localStorage.setItem('ngo', ngo);
+    }, [loggedIn, token, role, username, userid, email, ngo])
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-
-        setOpenErrorSnack(false);
+        
         setOpenAlertSnack(false);
     };
 
@@ -122,13 +126,8 @@ const LoginForm = () => {
                 <ColorButtonSolidOrange id='loginButton' size='large' variant='contained' onClick={submitForm} disabled={disableLogin}>Login</ColorButtonSolidOrange>
                 <Typography align='center'><Link href='/' underline='hover' color={purple[600]}>Forgot password?</Link></Typography>
             </Box>
-            <Snackbar open={openErrorSnack} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                Invalid username or password!
-                </Alert>
-            </Snackbar>
-            <Snackbar open={openAlertSnack} autoHideDuration={autoHideDuration} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
+            <Snackbar open={openAlertSnack} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
                 {alertMessage}
                 </Alert>
             </Snackbar>

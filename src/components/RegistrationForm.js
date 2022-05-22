@@ -40,7 +40,12 @@ const RegistrationForm = (props) => {
 
         var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
-        if (!password.match(regex)) {
+        if (!fname || !lname || !username || !password || !email || !gender || !dob || !phone || !address) {
+            setAutoHideDuration(6000);
+            setAlertMessage('Please fill all fields!');
+            setOpenAlertSnack(true);
+        }
+        else if (!password.match(regex)) {
             setAutoHideDuration(10000);
             setAlertMessage('Password must contain 6 to 20 characters, at least 1 numeric digit, and at least 1 uppercase and lowercase letter!');
             setOpenAlertSnack(true);
