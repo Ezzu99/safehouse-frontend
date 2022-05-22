@@ -96,10 +96,12 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <Typography sx={{ paddingX: '12px', color: purple[600], fontSize: '18px', fontWeight: 'bold' }}>{name}</Typography>
-        <Typography sx={{ paddingX: '12px', paddingBottom: '4px', color: '#999', }}>{email}</Typography>
+        <Box sx={{ paddingY: '6px', display: 'flex', flexDirection: 'column' }}>
+          <Typography variant='body' sx={{ paddingX: '18px', color: purple[600], fontSize: '18px', fontWeight: 'bold' }}>{name}</Typography>
+          <Typography variant='body' sx={{ paddingX: '18px', paddingBottom: '6px', color: '#999', }}>{email}</Typography>
+        </Box>
         <Divider />
-        <MenuItem onClick={() => router.push('/Profile')}>
+        <MenuItem onClick={() => router.push('/profile')}>
           <ListItemIcon>
             <PersonIcon fontSize="small" />
           </ListItemIcon>

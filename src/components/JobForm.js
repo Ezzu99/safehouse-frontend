@@ -1,10 +1,20 @@
 import * as React from 'react';
+import axios from 'axios';
 import { Box, Typography, Snackbar } from '@mui/material';
 import CustomTextField from './CustomTextField';
 import MuiAlert from '@mui/material/Alert';
 import { purple } from '@mui/material/colors';
 import { ColorButtonSolidOrange, ColorButtonOutlinedOrange } from './ColorButton';
 import styles from '../../styles/Home.module.css';
+
+let instance = axios.create({
+    baseURL: 'http://safehouse.herokuapp.com',
+    headers: {
+        post: {
+            'Content-Type': 'application/json'
+        }
+    }
+});
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;

@@ -16,7 +16,6 @@ import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import WorkIcon from '@mui/icons-material/Work';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
 import WorkshopPortal from '../src/components/WorkshopPortal';
 import JobPortal from '../src/components/JobPortal';
 
@@ -83,7 +82,7 @@ const Sidebar = () => {
                     </ThemeProvider>
                 </Box>
                 <Box sx={{ marginTop: '12px', marginBottom: '28px', marginX: '24px', paddingX: '22px', paddingY: '20px', bgcolor: orange[800]+'20', borderRadius: '8px' }}>
-                    <Typography variant='body1' color={orange[600]} sx={{ fontWeight: 'bold', textAlign: 'center' }}>{ngo}</Typography>
+                    <Typography variant='body1' color={orange[600]} sx={{ fontWeight: 'bold', textAlign: 'center' }}>{(role == 'admin') ? 'Admin' : ngo}</Typography>
                 </Box>
                 {
                     (role == 'ngo') ?
@@ -131,6 +130,21 @@ const Sidebar = () => {
                     >
                         <Tab label="Workshops" icon={<AssignmentTurnedInIcon fontSize='small'sx={{ marginTop: '4px' }}/>} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(0)} />
                         <Tab label="Jobs" icon={<WorkIcon fontSize='small'sx={{ marginTop: '4px' }}/>} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(1)} />
+                    </Tabs> :
+                    (role == 'admin') ?
+                    <Tabs
+                        orientation="vertical"
+                        variant="scrollable"
+                        value={value}
+                        textColor="secondary"
+                        TabIndicatorProps={{
+                            style: { background: purple[600], width: '3.5px', borderTopLeftRadius: '8px', borderBottomLeftRadius: '8px' }
+                        }}
+                        onChange={handleChange}
+                        sx={{ flexGrow: 1 }}
+                    >
+                        <Tab label="NGOs" icon={<AssignmentTurnedInIcon fontSize='small'sx={{ marginTop: '4px' }}/>} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(0)} />
+                        <Tab label="Affiliation Requests" icon={<WorkIcon fontSize='small'sx={{ marginTop: '4px' }}/>} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', paddingLeft: '20px' }} {...a11yProps(1)} />
                     </Tabs> :
                     null
                 }

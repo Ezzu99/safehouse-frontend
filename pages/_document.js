@@ -9,6 +9,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap"
             rel="stylesheet"
           />
+          <title>SafeHouse</title>
         </Head>
         <body>
           <Main />

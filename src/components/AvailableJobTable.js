@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box, Button, Drawer } from "@mui/material";
 import { purple, orange } from '@mui/material/colors';
@@ -8,6 +9,15 @@ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 import SendIcon from '@mui/icons-material/Send';
 import JobForm from './JobForm';
+
+let instance = axios.create({
+    baseURL: 'http://safehouse.herokuapp.com',
+    headers: {
+        post: {
+            'Content-Type': 'application/json'
+        }
+    }
+});
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 90 },

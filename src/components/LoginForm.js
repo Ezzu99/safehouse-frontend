@@ -30,10 +30,12 @@ const LoginForm = () => {
     const [openAlertSnack, setOpenAlertSnack] = React.useState(false);
     const [alertMessage, setAlertMessage] = React.useState('Enter username and password!');
     const [severity, setSeverity] = React.useState('warning');
-    const [userid, setUserid] = React.useState('');
     const [name, setName] = React.useState('');
     const [ngo, setNgo] = React.useState('');
     const [email, setEmail] = React.useState('');
+    const [phone, setPhone] = React.useState('');
+    const [address, setAddress] = React.useState('');
+    const [profileImage, setProfileImage] = React.useState('');
     const [loggedIn, setLoggedIn] = React.useState(false);
     const [token, setToken] = React.useState('');
     const [role, setRole] = React.useState('');
@@ -65,12 +67,14 @@ const LoginForm = () => {
                 let res = {
                     data: {
                         token: 'abcdefghijklmnopqrstuvwxyz',
-                        role: 'ngo',
+                        role: 'admin',
                         username: 'ezaan1999',
-                        id: '1',
                         name: 'Azan Ali',
                         ngo: 'Dar-Ul-Sakoon',
-                        email: 'ezaan1999.ali@gmail.com'
+                        email: 'ezaan1999.ali@gmail.com',
+                        profileImage: 'https://images.pexels.com/photos/1226302/pexels-photo-1226302.jpeg?cs=srgb&dl=pexels-tausif-hossain-1226302.jpg&fm=jpg',
+                        phone: '+92 3122075769',
+                        address: 'Block-2, Gulistan-e-Johar, Karachi'
                     }
                 }
                 console.log(res);
@@ -78,12 +82,14 @@ const LoginForm = () => {
                 setToken(res.data.token);
                 setRole(res.data.role);
                 setUsername(res.data.username);
-                setUserid(res.data.id);
                 setName(res.data.name);
                 setEmail(res.data.email);
                 setNgo(res.data.ngo);
+                setPhone(res.data.phone);
+                setAddress(res.data.address);
+                setProfileImage(res.data.profileImage);
                 
-                router.replace('/Dashboard');
+                router.replace('/dashboard');
             }
             catch (e) {
                 setSeverity('error');
@@ -100,17 +106,19 @@ const LoginForm = () => {
         localStorage.setItem('token', token);
         localStorage.setItem('role', role);
         localStorage.setItem('username', username);
-        localStorage.setItem('id', userid);
         localStorage.setItem('name', name);
         localStorage.setItem('email', email);
         localStorage.setItem('ngo', ngo);
-    }, [loggedIn, token, role, username, userid, email, ngo])
+        localStorage.setItem('profileImage', profileImage);
+        localStorage.setItem('phone', phone);
+        localStorage.setItem('address', address);
+    }, [loggedIn, token, role, username, email, ngo, profileImage, address, phone])
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-        
+
         setOpenAlertSnack(false);
     };
 
