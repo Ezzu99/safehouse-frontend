@@ -56,6 +56,7 @@ function a11yProps(index) {
 const Sidebar = () => {
     const [name, setName] = React.useState('');
     const [role, setRole] = React.useState('');
+    const [ngo, setNgo] = React.useState('');
     const [value, setValue] = React.useState(0);
     let router = useRouter();
 
@@ -66,6 +67,7 @@ const Sidebar = () => {
     React.useEffect(() => {
         setRole(localStorage.getItem('role'));
         setName(localStorage.getItem('name'));
+        setNgo(localStorage.getItem('ngo'));
 
         if (!JSON.parse(localStorage.getItem('loggedIn'))) {
             router.replace('/');
@@ -81,7 +83,7 @@ const Sidebar = () => {
                     </ThemeProvider>
                 </Box>
                 <Box sx={{ marginTop: '12px', marginBottom: '28px', marginX: '24px', paddingX: '22px', paddingY: '20px', bgcolor: orange[800]+'20', borderRadius: '8px' }}>
-                    <Typography variant='body1' color={orange[600]} sx={{ fontWeight: 'bold', textAlign: 'center' }}>{name}</Typography>
+                    <Typography variant='body1' color={orange[600]} sx={{ fontWeight: 'bold', textAlign: 'center' }}>{ngo}</Typography>
                 </Box>
                 {
                     (role == 'ngo') ?

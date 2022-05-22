@@ -7,6 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import PersonIcon from '@mui/icons-material/Person';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useRouter } from 'next/router';
@@ -98,6 +99,12 @@ export default function AccountMenu() {
         <Typography sx={{ paddingX: '12px', color: purple[600], fontSize: '18px', fontWeight: 'bold' }}>{name}</Typography>
         <Typography sx={{ paddingX: '12px', paddingBottom: '4px', color: '#999', }}>{email}</Typography>
         <Divider />
+        <MenuItem onClick={() => router.push('/Profile')}>
+          <ListItemIcon>
+            <PersonIcon fontSize="small" />
+          </ListItemIcon>
+          Profile
+        </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <Settings fontSize="small" />
