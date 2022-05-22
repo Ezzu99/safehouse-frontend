@@ -5,8 +5,11 @@ import profilePic from '../src/assets/user.png';
 import { ThemeProvider } from '@mui/material';
 import HeadingFont from '../src/fonts/fonts';
 import { ColorButtonTextGray } from '../src/components/ColorButton';
+import PostAddIcon from '@mui/icons-material/PostAdd';
 import EditIcon from '@mui/icons-material/Edit';
 import EditProfileForm from '../src/components/EditProfileForm';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import Portfolio from '../src/components/Portfolio';
 
 const profile = () => {
     const [name, setName] = React.useState('');
@@ -17,6 +20,7 @@ const profile = () => {
     const [address, setAddress] = React.useState('');    
     const [profileImage, setProfileImage] = React.useState('');
     const [drawer, setDrawer] = React.useState(false);
+    // const [instance, updateInstance] = usePDF({ document: Portfolio });
 
     React.useEffect(() => {
         setName(localStorage.getItem('name'));
@@ -42,7 +46,13 @@ const profile = () => {
                             <ThemeProvider theme={HeadingFont}>
                                 <Typography variant='h4' color='#555'>{name}</Typography>
                             </ThemeProvider>
-                            <ColorButtonTextGray startIcon={<EditIcon />} sx={{ position: 'relative', top: '-8px' }} onClick={() => setDrawer(true)}>Edit Profile</ColorButtonTextGray>
+                            <Box suppressHydrationWarning={true} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                { process.browser && <PDFDownloadLink document={<Portfolio name={name} email={email} phoneNum={phone} courses={[]} jobs={[]} />} fileName={`${name.replace(/\s/g, '-')}.pdf`}>
+                                    {({ loading }) => loading ? <ColorButtonTextGray startIcon={<PostAddIcon />} sx={{ position: 'relative', top: '-8px' }}>Loading...</ColorButtonTextGray> : <ColorButtonTextGray startIcon={<PostAddIcon />} sx={{ position: 'relative', top: '-8px' }}>Download Portfolio</ColorButtonTextGray>}
+                                    </PDFDownloadLink>
+                                }
+                                <ColorButtonTextGray startIcon={<EditIcon />} sx={{ position: 'relative', top: '-8px' }} onClick={() => setDrawer(true)}>Edit Profile</ColorButtonTextGray>
+                            </Box>
                         </Box>
                         <Typography variant='body' color='#777' sx={{ marginTop: '22px' }}>{ngo}</Typography>
                         <Typography variant='body' color='#777' sx={{ marginTop: '8px' }}><Link href={'mailto:' + email}>{email}</Link></Typography>
