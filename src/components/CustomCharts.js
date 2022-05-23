@@ -78,137 +78,28 @@ const renderActiveShape = (props) => {
     );
 };
 
-const rangeData = [
-    {
-        "month": "Jan",
-        "job": [
-            2,
-            10
-        ]
-    },
-    {
-        "month": "Feb",
-        "job": [
-            7,
-            15
-        ]
-    },
-    {
-        "month": "Mar",
-        "job": [
-            9,
-            15
-        ]
-    },
-    {
-        "month": "Apr",
-        "job": [
-            12,
-            18
-        ]
-    },
-    {
-        "month": "May",
-        "job": [
-            17,
-            21
-        ]
-    },
-    {
-        "month": "Jun",
-        "job": [
-            10,
-            17
-        ]
-    },
-    {
-        "month": "Jul",
-        "job": [
-            7,
-            15
-        ]
-    },
-    {
-        "month": "Aug",
-        "job": [
-            3,
-            10
-        ]
-    },
-    {
-        "month": "Sep",
-        "job": [
-            1,
-            8
-        ]
-    }
-];
-
-const data = [
-    {
-        "name": "Applied",
-        "value": 400
-    },
-    {
-        "name": "Enrolled",
-        "value": 200
-    },
-    {
-        "name": "Completed",
-        "value": 300
-    }
-];
-
-const users = [
-    {
-        "month": "Jan",
-        "Rehablitated": 400,
-        "Joined": 240
-    },
-    {
-        "month": "Feb",
-        "Rehablitated": 300,
-        "Joined": 139
-    },
-    {
-        "month": "Mar",
-        "Rehablitated": 200,
-        "Joined": 980
-    },
-    {
-        "month": "Apr",
-        "Rehablitated": 278,
-        "Joined": 390
-    },
-    {
-        "month": "May",
-        "Rehablitated": 189,
-        "Joined": 480
-    },
-    {
-        "month": "Jun",
-        "Rehablitated": 239,
-        "Joined": 380
-    },
-    {
-        "month": "Jul",
-        "Rehablitated": 349,
-        "Joined": 430
-    }
-];
-
-const CustomBarChart = () => {
+const CustomBarChart = ({ jobs }) => {
     return (
-        <ResponsiveContainer width="100%" height="100%" >
-            <BarChart data={rangeData} >
-                <Tooltip allowEscapeViewBox={{ y: false, x: false }} content={<CustomBarTooltip />} />
-                <Bar dataKey="job" fill={purple[600]} radius={[6, 6, 6, 6]} />
-            </BarChart>
-        </ResponsiveContainer>
+        <>
+            {
+                (jobs?.length) ?
+                <ResponsiveContainer width="100%" height="100%" >
+                    <BarChart data={jobs} >
+                        <Tooltip allowEscapeViewBox={{ y: false, x: false }} content={<CustomBarTooltip />} />
+                        <Bar dataKey="job" fill={purple[600]} radius={[6, 6, 6, 6]} />
+                    </BarChart>
+                </ResponsiveContainer> :
+                <ResponsiveContainer width="100%" height="100%" >
+                    <Box sx={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Typography variant='body' color={purple[600]}>No data available</Typography>
+                    </Box>
+                </ResponsiveContainer>
+            }
+        </>
     );
 }
 
-const CustomPieChart = () => {
+const CustomPieChart = ({ courses }) => {
     const [activeIndex, setActiveIndex] = React.useState(null);
 
     const onPieEnter = (data, index) => setActiveIndex(index);
@@ -216,25 +107,45 @@ const CustomPieChart = () => {
     const onPieLeave = () => setActiveIndex(null);
 
     return (
-        <ResponsiveContainer width="100%" height="100%" >
-            <PieChart>
-                <Tooltip allowEscapeViewBox={{ y: false, x: false }} content={<CustomPieTooltip />} />
-                <Pie activeIndex={activeIndex} activeShape={renderActiveShape} data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" stroke="none" outerRadius={100} innerRadius={60} paddingAngle={3} fill={orange[600]} onMouseEnter={onPieEnter} onMouseLeave={onPieLeave} />
-            </PieChart>
-        </ResponsiveContainer>
+        <>
+            {
+                (courses?.length) ?
+                <ResponsiveContainer width="100%" height="100%" >
+                    <PieChart>
+                        <Tooltip allowEscapeViewBox={{ y: false, x: false }} content={<CustomPieTooltip />} />
+                        <Pie activeIndex={activeIndex} activeShape={renderActiveShape} data={courses} dataKey="value" nameKey="name" cx="50%" cy="50%" stroke="none" outerRadius={100} innerRadius={60} paddingAngle={3} fill={orange[600]} onMouseEnter={onPieEnter} onMouseLeave={onPieLeave} />
+                    </PieChart>
+                </ResponsiveContainer> :
+                <ResponsiveContainer width="100%" height="100%" >
+                    <Box sx={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Typography variant='body' color={orange[600]}>No data available</Typography>
+                    </Box>
+                </ResponsiveContainer>
+            }
+        </>
     );
 }
 
-const CustomLineGraph = () => {
+const CustomLineGraph = ({ users }) => {
     return (
-        <ResponsiveContainer>
-            <LineChart width={730} height={250} data={users} margin={{ top: 5, right: 30, left: 20, bottom: 5 }} >
-                <Tooltip allowEscapeViewBox={{ y: false, x: false }} content={<CustomLineTooltip />} />
-                <Legend />
-                <Line type="monotone" dataKey="Joined" stroke={orange[600]} strokeWidth={4} />
-                <Line type="monotone" dataKey="Rehablitated" stroke={purple[600]} strokeWidth={2} />
-            </LineChart>
-        </ResponsiveContainer>
+        <>
+            {
+                (users?.length) ?
+                <ResponsiveContainer>
+                    <LineChart width={730} height={250} data={users} margin={{ top: 5, right: 30, left: 20, bottom: 5 }} >
+                        <Tooltip allowEscapeViewBox={{ y: false, x: false }} content={<CustomLineTooltip />} />
+                        <Legend />
+                        <Line type="monotone" dataKey="Joined" stroke={orange[600]} strokeWidth={4} />
+                        <Line type="monotone" dataKey="Rehablitated" stroke={purple[600]} strokeWidth={2} />
+                    </LineChart>
+                </ResponsiveContainer> :
+                <ResponsiveContainer width="100%" height="100%" >
+                    <Box sx={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Typography variant='body' color={orange[600]}>No data available</Typography>
+                    </Box>
+                </ResponsiveContainer>
+            }
+        </>
     );
 }
 

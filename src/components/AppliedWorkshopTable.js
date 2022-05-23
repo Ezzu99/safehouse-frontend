@@ -31,30 +31,10 @@ const columns = [
     }
 ];
 
-const rows = [
-    { id: 1, instructor: 'White', name: 'John', age: 35 },
-    { id: 2, instructor: 'Lannister', name: 'Cersei', age: 42 },
-    { id: 3, instructor: 'Lannister', name: 'Jaime', age: 45 },
-    { id: 4, instructor: 'Stark', name: 'Arya', age: 16 },
-    { id: 5, instructor: 'Targaryen', name: 'Daenerys', age: 22 },
-    { id: 6, instructor: 'Melisandre', name: 'Alex', age: 15 },
-    { id: 7, instructor: 'Clifford', name: 'Ferrara', age: 44 },
-    { id: 8, instructor: 'Frances', name: 'Rossini', age: 36 },
-    { id: 9, instructor: 'Roxie', name: 'Harvey', age: 65 },
-    { id: 10, instructor: 'Lannister', name: 'Cersei', age: 42 },
-    { id: 11, instructor: 'Lannister', name: 'Jaime', age: 45 },
-    { id: 12, instructor: 'Stark', name: 'Arya', age: 16 },
-    { id: 13, instructor: 'Targaryen', name: 'Daenerys', age: 22 },
-    { id: 14, instructor: 'Melisandre', name: 'Alex', age: 15 },
-    { id: 15, instructor: 'Clifford', name: 'Ferrara', age: 44 },
-    { id: 16, instructor: 'Frances', name: 'Rossini', age: 36 },
-    { id: 17, instructor: 'Roxie', name: 'Harvey', age: 65 },
-];
-
 const AppliedWorkshopTable = (props) => {
     const [disable, setDisable] = React.useState(false);
     const [selectedRows, setSelectedRows] = React.useState([]);
-    const [drawer, setDrawer] = React.useState(false);
+    const [rows, setRows] = React.useState([]);
     const [role, setrole] = React.useState();
 
     const deleteRows = (e) => {
@@ -64,6 +44,41 @@ const AppliedWorkshopTable = (props) => {
     React.useEffect(() => {
         selectedRows.length == 0 ? setDisable(true) : setDisable(false);
         setrole(localStorage.getItem('role'));
+
+        try {
+            // let res = await instance.post('/v1/login/', {
+                //     username,
+                //     password
+                // })
+                let res = {
+                    data: {
+                        rows: [
+                            { id: 1, instructor: 'White', name: 'John', age: 35 },
+                            { id: 2, instructor: 'Lannister', name: 'Cersei', age: 42 },
+                            { id: 3, instructor: 'Lannister', name: 'Jaime', age: 45 },
+                            { id: 4, instructor: 'Stark', name: 'Arya', age: 16 },
+                            { id: 5, instructor: 'Targaryen', name: 'Daenerys', age: 22 },
+                            { id: 6, instructor: 'Melisandre', name: 'Alex', age: 15 },
+                            { id: 7, instructor: 'Clifford', name: 'Ferrara', age: 44 },
+                            { id: 8, instructor: 'Frances', name: 'Rossini', age: 36 },
+                            { id: 9, instructor: 'Roxie', name: 'Harvey', age: 65 },
+                            { id: 10, instructor: 'Lannister', name: 'Cersei', age: 42 },
+                            { id: 11, instructor: 'Lannister', name: 'Jaime', age: 45 },
+                            { id: 12, instructor: 'Stark', name: 'Arya', age: 16 },
+                            { id: 13, instructor: 'Targaryen', name: 'Daenerys', age: 22 },
+                            { id: 14, instructor: 'Melisandre', name: 'Alex', age: 15 },
+                            { id: 15, instructor: 'Clifford', name: 'Ferrara', age: 44 },
+                            { id: 16, instructor: 'Frances', name: 'Rossini', age: 36 },
+                            { id: 17, instructor: 'Roxie', name: 'Harvey', age: 65 },
+                        ]
+                    }
+                }
+
+                setRows(res.data.rows);
+        }
+        catch {
+
+        }
     }, [selectedRows]);
 
     return (

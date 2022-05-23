@@ -41,20 +41,11 @@ const columns = [
     }
 ];
 
-const rows = [
-    { id: 1, description: 'ReactJS', name: 'Astera', employer: 'John' },
-    { id: 2, description: 'AngularJS', name: 'Motive', employer: 'John' },
-    { id: 3, description: 'VueJS', name: 'Brainx', employer: 'John' },
-    { id: 4, description: 'Python', name: 'Arya', employer: 'Cena' },
-    { id: 5, description: 'C++', name: 'Daenerys', employer: 'Cena' },
-    { id: 6, description: 'NodeJS', name: 'Flex', employer: 'Cena' },
-    { id: 7, description: 'JavaScript', name: 'Astera', employer: 'Cena' }
-];
-
 const AvailableJobTable = (props) => {
     const [disable, setDisable] = React.useState(false);
     const [selectedRows, setSelectedRows] = React.useState([]);
     const [drawer, setDrawer] = React.useState(false);
+    const [rows, setRows] = React.useState([]);
     const [role, setrole] = React.useState();
 
     const deleteRows = (e) => {
@@ -64,6 +55,31 @@ const AvailableJobTable = (props) => {
     React.useEffect(() => {
         selectedRows.length == 0 ? setDisable(true) : setDisable(false);
         setrole(localStorage.getItem('role'));
+
+        try {
+            // let res = await instance.post('/v1/login/', {
+                //     username,
+                //     password
+                // })
+                let res = {
+                    data: {
+                        rows: [
+                            { id: 1, description: 'ReactJS', name: 'Astera', employer: 'John' },
+                            { id: 2, description: 'AngularJS', name: 'Motive', employer: 'John' },
+                            { id: 3, description: 'VueJS', name: 'Brainx', employer: 'John' },
+                            { id: 4, description: 'Python', name: 'Arya', employer: 'Cena' },
+                            { id: 5, description: 'C++', name: 'Daenerys', employer: 'Cena' },
+                            { id: 6, description: 'NodeJS', name: 'Flex', employer: 'Cena' },
+                            { id: 7, description: 'JavaScript', name: 'Astera', employer: 'Cena' }
+                        ]
+                    }
+                }
+
+                setRows(res.data.rows);
+        }
+        catch {
+
+        }
     }, [selectedRows]);
 
     return (

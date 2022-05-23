@@ -67,7 +67,7 @@ const LoginForm = () => {
                 let res = {
                     data: {
                         token: 'abcdefghijklmnopqrstuvwxyz',
-                        role: 'admin',
+                        role: 'homeless',
                         username: 'ezaan1999',
                         name: 'Azan Ali',
                         ngo: 'Dar-Ul-Sakoon',

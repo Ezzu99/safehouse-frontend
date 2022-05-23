@@ -41,17 +41,11 @@ const columns = [
     }
 ];
 
-const rows = [
-    { id: 1, name: 'Data Science', instructor: 'Jon', description: 'Master data science, Python & SQL, analyze & visualize data, build machine learning models' },
-    { id: 2, name: 'Data Science', instructor: 'Cersei', description: 'Master data science, Python & SQL, analyze & visualize data, build machine learning models' },
-    { id: 3, name: 'Data Science', instructor: 'Jaime', description: 'Master data science, Python & SQL, analyze & visualize data, build machine learning models' },
-    { id: 4, name: 'Data Science', instructor: 'Arya', description: 'Master data science, Python & SQL, analyze & visualize data, build machine learning models' }
-];
-
 const AvailableWorkshopTable = (props) => {
     const [disable, setDisable] = React.useState(false);
     const [selectedRows, setSelectedRows] = React.useState([]);
     const [drawer, setDrawer] = React.useState(false);
+    const [rows, setRows] = React.useState([]);
     const [role, setrole] = React.useState();
 
     const deleteRows = (e) => {
@@ -61,6 +55,28 @@ const AvailableWorkshopTable = (props) => {
     React.useEffect(() => {
         selectedRows.length == 0 ? setDisable(true) : setDisable(false);
         setrole(localStorage.getItem('role'));
+
+        try {
+            // let res = await instance.post('/v1/login/', {
+                //     username,
+                //     password
+                // })
+                let res = {
+                    data: {
+                        rows: [
+                            { id: 1, name: 'Data Science', instructor: 'Jon', description: 'Master data science, Python & SQL, analyze & visualize data, build machine learning models' },
+                            { id: 2, name: 'Data Science', instructor: 'Cersei', description: 'Master data science, Python & SQL, analyze & visualize data, build machine learning models' },
+                            { id: 3, name: 'Data Science', instructor: 'Jaime', description: 'Master data science, Python & SQL, analyze & visualize data, build machine learning models' },
+                            { id: 4, name: 'Data Science', instructor: 'Arya', description: 'Master data science, Python & SQL, analyze & visualize data, build machine learning models' }
+                        ]
+                    }
+                }
+
+                setRows(res.data.rows);
+        }
+        catch {
+
+        }
     }, [selectedRows]);
 
     return (

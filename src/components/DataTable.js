@@ -41,30 +41,11 @@ const columns = [
     }
 ];
 
-const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: 22 },
-    { id: 6, lastName: 'Melisandre', firstName: 'Alex', age: 15 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 10, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 11, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 12, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 13, lastName: 'Targaryen', firstName: 'Daenerys', age: 22 },
-    { id: 14, lastName: 'Melisandre', firstName: 'Alex', age: 15 },
-    { id: 15, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 16, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 17, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
-
 const DataTable = (props) => {
     const [disable, setDisable] = React.useState(false);
     const [selectedRows, setSelectedRows] = React.useState([]);
     const [drawer, setDrawer] = React.useState(false);
+    const [rows, setRows] = React.useState([]);
 
     const deleteRows = (e) => {
         console.log(selectedRows);
@@ -72,6 +53,41 @@ const DataTable = (props) => {
 
     React.useEffect(() => {
         selectedRows.length == 0 ? setDisable(true) : setDisable(false);
+
+        try {
+            // let res = await instance.post('/v1/login/', {
+                //     username,
+                //     password
+                // })
+                let res = {
+                    data: {
+                        rows: [
+                            { id: 1, lastName: 'Black', firstName: 'John', age: 35 },
+                            { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+                            { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+                            { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+                            { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: 22 },
+                            { id: 6, lastName: 'Melisandre', firstName: 'Alex', age: 15 },
+                            { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+                            { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+                            { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+                            { id: 10, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+                            { id: 11, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+                            { id: 12, lastName: 'Stark', firstName: 'Arya', age: 16 },
+                            { id: 13, lastName: 'Targaryen', firstName: 'Daenerys', age: 22 },
+                            { id: 14, lastName: 'Melisandre', firstName: 'Alex', age: 15 },
+                            { id: 15, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+                            { id: 16, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+                            { id: 17, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+                        ]
+                    }
+                }
+
+                setRows(res.data.rows);
+        }
+        catch {
+
+        }
     }, [selectedRows]);
 
     return (

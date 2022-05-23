@@ -104,7 +104,7 @@ export default function AccountMenu() {
         </Box>
         <Divider />
         {
-          (role != 'admin') ?
+          (role == 'homeless') ?
           <MenuItem onClick={() => router.push('/profile')}>
             <ListItemIcon>
               <PersonIcon fontSize="small" />
