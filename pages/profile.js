@@ -48,6 +48,21 @@ function a11yProps(index) {
     };
 }
 
+const SafeHouseCard = ({ name, instructor, url }) => {
+    return (
+        <Box sx={{ width: '400px', height: '200px', borderRadius: '8px', boxShadow: '0 10px 12px  #aeaeae', display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
+            <Box sx={{ width: '140px', height: '200px', bgcolor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Typography variant='h6' color={purple[600]} sx={{ fontWeight: 'bold' }}>SafeHouse</Typography>
+            </Box>
+            <Box sx={{ flexGrow: 1, height: '200px', padding: '12px', bgcolor: purple[600], display: 'flex', flexDirection: 'column' }}>
+                <Typography variant='h6' color='white' sx={{ fontWeight: 'bold', textTransform: 'capitalize' }}>{name}</Typography>
+                <Typography variant='body' color='#dedede' sx={{ textTransform: 'capitalize' }}>{instructor}</Typography>
+                <Typography variant='body' color='#dedede'><Link href={url} target='_blank' sx={{ color: '#dedede' }}>{url}</Link></Typography>
+            </Box>
+        </Box>
+    )
+}
+
 const profile = () => {
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
@@ -113,31 +128,17 @@ const profile = () => {
                     }}
                     aria-label="secondary tabs example"
                 >
-                    <Tab label="Certifications" {...a11yProps(0)}/>
+                    <Tab label="Experience" {...a11yProps(0)}/>
                     <Tab label="Skills" {...a11yProps(1)}/>
                 </Tabs>
                 <TabPanel value={value} index={0}>
                     <Box sx={{ marginTop: '12px' }}>
-                        <Box sx={{ width: '400px', height: '200px', borderRadius: '8px', boxShadow: '0 10px 12px  #aeaeae', display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
-                            <Box sx={{ width: '140px', height: '200px', borderTopRightRadius: '12px', borderBottomRightRadius: '12px', bgcolor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <Typography variant='h6' color={purple[600]} sx={{ fontWeight: 'bold' }}>SafeHouse</Typography>
-                            </Box>
-                            <Box sx={{ flexGrow: 1, height: '200px', padding: '12px', bgcolor: purple[600], display: 'flex', flexDirection: 'column' }}>
-                                <Typography variant='h6' color='white' sx={{ fontWeight: 'bold' }}>Data Science</Typography>
-                            </Box>
-                        </Box>
+                        <SafeHouseCard name='Astera' instructor='jawwad shamsi' url='https://www.datacamp.com'/>
                     </Box>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <Box sx={{ marginTop: '12px' }}>
-                        <Box sx={{ width: '400px', height: '200px', borderRadius: '8px', boxShadow: '0 10px 12px  #aeaeae', display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
-                            <Box sx={{ width: '140px', height: '200px', bgcolor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <Typography variant='h6' color={purple[600]} sx={{ fontWeight: 'bold' }}>SafeHouse</Typography>
-                            </Box>
-                            <Box sx={{ flexGrow: 1, height: '200px', padding: '12px', bgcolor: purple[600], display: 'flex', flexDirection: 'column' }}>
-                                <Typography variant='h6' color='white' sx={{ fontWeight: 'bold' }}>Data Science</Typography>
-                            </Box>
-                        </Box>
+                        <SafeHouseCard name='data science' instructor='jawwad shamsi' url='https://www.datacamp.com'/>
                     </Box>
                 </TabPanel>
             </Box>

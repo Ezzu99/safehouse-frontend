@@ -72,7 +72,7 @@ const LoginForm = () => {
                         name: 'Azan Ali',
                         ngo: 'Dar-Ul-Sakoon',
                         email: 'ezaan1999.ali@gmail.com',
-                        profileImage: 'https://images.pexels.com/photos/1226302/pexels-photo-1226302.jpeg?cs=srgb&dl=pexels-tausif-hossain-1226302.jpg&fm=jpg',
+                        profileImage: 'https://picsum.photos/200/250',
                         phone: '+92 3122075769',
                         address: 'Block-2, Gulistan-e-Johar, Karachi'
                     }
