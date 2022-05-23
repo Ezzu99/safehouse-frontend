@@ -50,8 +50,9 @@ function a11yProps(index) {
 
 const SafeHouseCard = ({ name, instructor, url }) => {
     return (
-        <Box sx={{ width: '400px', height: '200px', borderRadius: '8px', boxShadow: '0 10px 12px  #aeaeae', display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
+        <Box sx={{ width: '400px', height: '200px', borderRadius: '8px', boxShadow: '0 6px 22px  #aeaeae', display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
             <Box sx={{ width: '140px', height: '200px', bgcolor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Typography color='#555' sx={{ position: 'absolute', transform: 'translate(-12px, -18px)' }}>Certified by</Typography>
                 <Typography variant='h6' color={purple[600]} sx={{ fontWeight: 'bold' }}>SafeHouse</Typography>
             </Box>
             <Box sx={{ flexGrow: 1, height: '200px', padding: '12px', bgcolor: purple[600], display: 'flex', flexDirection: 'column' }}>
@@ -132,12 +133,15 @@ const profile = () => {
                     <Tab label="Skills" {...a11yProps(1)}/>
                 </Tabs>
                 <TabPanel value={value} index={0}>
-                    <Box sx={{ marginTop: '12px' }}>
-                        <SafeHouseCard name='Astera' instructor='jawwad shamsi' url='https://www.datacamp.com'/>
+                    <Box sx={{ marginTop: '12px', display: 'flex', flexDirection: 'row', gap: '24px' }}>
+                        <SafeHouseCard name='Frontend Engineer' instructor='Astra' url='https://www.astra.com'/>
+                        <SafeHouseCard name='Backend Engineer' instructor='Contour Softwares' url='https://contour-software.com'/>
                     </Box>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <Box sx={{ marginTop: '12px' }}>
+                    <Box sx={{ marginTop: '12px', display: 'flex', flexDirection: 'row', gap: '24px', flexWrap: 'wrap' }}>
+                        <SafeHouseCard name='data science' instructor='jawwad shamsi' url='https://www.datacamp.com'/>
+                        <SafeHouseCard name='data science' instructor='jawwad shamsi' url='https://www.datacamp.com'/>
                         <SafeHouseCard name='data science' instructor='jawwad shamsi' url='https://www.datacamp.com'/>
                     </Box>
                 </TabPanel>
