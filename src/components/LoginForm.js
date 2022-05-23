@@ -10,7 +10,7 @@ import CustomTextField from './CustomTextField';
 import { ColorButtonSolidOrange } from './ColorButton';
 
 let instance = axios.create({
-    baseURL: 'http://safehouse.herokuapp.com',
+    baseURL: 'http://0f07-125-209-114-66.ngrok.io/',
     headers: {
         post: {
             'Content-Type': 'application/json'
@@ -60,26 +60,29 @@ const LoginForm = () => {
             setDisableLogin(true);
             
             try {
-                // let res = await instance.post('/v1/login/', {
-                //     username,
-                //     password
-                // })
-                let res = {
-                    data: {
-                        token: 'abcdefghijklmnopqrstuvwxyz',
-                        role: 'homeless',
-                        username: 'ezaan1999',
-                        name: 'Azan Ali',
-                        ngo: 'Dar-Ul-Sakoon',
-                        email: 'ezaan1999.ali@gmail.com',
-                        profileImage: 'https://picsum.photos/200/250',
-                        phone: '+92 3122075769',
-                        address: 'Block-2, Gulistan-e-Johar, Karachi'
-                    }
-                }
-                console.log(res);
+                let res = await instance.post('/api/signin', {
+                    username,
+                    password
+                });
+
+                // let res = {
+                //     data: {
+                //         token: 'abcdefghijklmnopqrstuvwxyz',
+                //         role: 'homeless',
+                //         username: 'ezaan1999',
+                //         name: 'Azan Ali',
+                //         ngo: 'Dar-Ul-Sakoon',
+                //         email: 'ezaan1999.ali@gmail.com',
+                //         profileImage: 'https://images.pexels.com/photos/1226302/pexels-photo-1226302.jpeg?cs=srgb&dl=pexels-tausif-hossain-1226302.jpg&fm=jpg',
+                //         phone: '+92 3122075769',
+                //         address: 'Block-2, Gulistan-e-Johar, Karachi'
+                //     }
+                // }
+
+                console.log(res.data);
                 setLoggedIn(true);
                 setToken(res.data.token);
+                // localStorage.setItem('token', res.data.token);
                 setRole(res.data.role);
                 setUsername(res.data.username);
                 setName(res.data.name);
@@ -87,7 +90,7 @@ const LoginForm = () => {
                 setNgo(res.data.ngo);
                 setPhone(res.data.phone);
                 setAddress(res.data.address);
-                setProfileImage(res.data.profileImage);
+                setProfileImage('https://picsum.photos/200/250');
                 
                 router.replace('/dashboard');
             }

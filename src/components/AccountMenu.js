@@ -22,8 +22,8 @@ export default function AccountMenu() {
   let router = useRouter();
 
   React.useEffect(() => {
-      setName(localStorage.getItem('name'));
-      setEmail(localStorage.getItem('email'));
+      setName(role === 'admin' ? 'Admin' : localStorage.getItem('name'));
+      setEmail(role === 'admin' ? 'admin@safehouse.io' : localStorage.getItem('email'));
       setRole(localStorage.getItem('role'));
   }, []);
 
@@ -98,11 +98,12 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <Box sx={{ paddingY: '6px', display: 'flex', flexDirection: 'column' }}>
-          <Typography variant='body' sx={{ paddingX: '18px', color: purple[600], fontSize: '18px', fontWeight: 'bold' }}>{name}</Typography>
-          <Typography variant='body' sx={{ paddingX: '18px', paddingBottom: '6px', color: '#999', }}>{email}</Typography>
-        </Box>
-        <Divider />
+        { role !== 'admin' && <Box sx={{ paddingY: '6px', display: 'flex', flexDirection: 'column' }}>
+            <Typography variant='body' sx={{ paddingX: '18px', color: purple[600], fontSize: '18px', fontWeight: 'bold' }}>{name}</Typography>
+            <Typography variant='body' sx={{ paddingX: '18px', paddingBottom: '6px', color: '#999', }}>{email}</Typography>
+          </Box>
+        }
+        { role !== 'admin' && <Divider /> }
         {
           (role == 'homeless') ?
           <MenuItem onClick={() => router.push('/profile')}>

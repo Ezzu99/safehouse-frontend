@@ -9,15 +9,6 @@ import Grid from '@mui/material/Grid';
 import { purple, orange } from '@mui/material/colors';
 import { CustomBarChart, CustomPieChart, CustomLineGraph } from './CustomCharts';
 
-let instance = axios.create({
-    baseURL: 'http://safehouse.herokuapp.com',
-    headers: {
-        post: {
-            'Content-Type': 'application/json'
-        }
-    }
-});
-
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     borderRadius: '8px',
@@ -32,134 +23,142 @@ const GraphingComponent = () => {
 
     React.useEffect(() => {
         try {
-            // let res = await instance.post('/v1/login/', {
-                //     username,
-                //     password
-                // })
-                let res = {
-                    data: {
-                        jobs: [
-                            {
-                                "month": "Jan",
-                                "job": [
-                                    2,
-                                    10
-                                ]
-                            },
-                            {
-                                "month": "Feb",
-                                "job": [
-                                    7,
-                                    15
-                                ]
-                            },
-                            {
-                                "month": "Mar",
-                                "job": [
-                                    9,
-                                    15
-                                ]
-                            },
-                            {
-                                "month": "Apr",
-                                "job": [
-                                    12,
-                                    18
-                                ]
-                            },
-                            {
-                                "month": "May",
-                                "job": [
-                                    17,
-                                    21
-                                ]
-                            },
-                            {
-                                "month": "Jun",
-                                "job": [
-                                    10,
-                                    17
-                                ]
-                            },
-                            {
-                                "month": "Jul",
-                                "job": [
-                                    7,
-                                    15
-                                ]
-                            },
-                            {
-                                "month": "Aug",
-                                "job": [
-                                    3,
-                                    10
-                                ]
-                            },
-                            {
-                                "month": "Sep",
-                                "job": [
-                                    1,
-                                    8
-                                ]
-                            }
-                        ],
-                        courses: [
-                            {
-                                "name": "Applied",
-                                "value": 400
-                            },
-                            {
-                                "name": "Enrolled",
-                                "value": 200
-                            },
-                            {
-                                "name": "Completed",
-                                "value": 300
-                            }
-                        ],
-                        users: [
-                            {
-                                "month": "Jan",
-                                "Rehablitated": 400,
-                                "Joined": 240
-                            },
-                            {
-                                "month": "Feb",
-                                "Rehablitated": 300,
-                                "Joined": 139
-                            },
-                            {
-                                "month": "Mar",
-                                "Rehablitated": 200,
-                                "Joined": 980
-                            },
-                            {
-                                "month": "Apr",
-                                "Rehablitated": 278,
-                                "Joined": 390
-                            },
-                            {
-                                "month": "May",
-                                "Rehablitated": 189,
-                                "Joined": 480
-                            },
-                            {
-                                "month": "Jun",
-                                "Rehablitated": 239,
-                                "Joined": 380
-                            },
-                            {
-                                "month": "Jul",
-                                "Rehablitated": 349,
-                                "Joined": 430
-                            }
-                        ]
+            (async () => {
+                const res = await axios.get('http://0f07-125-209-114-66.ngrok.io/api/statistics', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
-                }
+                });
+                // let res = await instance.post('/v1/login/', {
+                    //     username,
+                    //     password
+                    // })
+                    // let res = {
+                    //     data: {
+                    //         jobs: [
+                    //             {
+                    //                 "month": "Jan",
+                    //                 "job": [
+                    //                     2,
+                    //                     10
+                    //                 ]
+                    //             },
+                    //             {
+                    //                 "month": "Feb",
+                    //                 "job": [
+                    //                     7,
+                    //                     15
+                    //                 ]
+                    //             },
+                    //             {
+                    //                 "month": "Mar",
+                    //                 "job": [
+                    //                     9,
+                    //                     15
+                    //                 ]
+                    //             },
+                    //             {
+                    //                 "month": "Apr",
+                    //                 "job": [
+                    //                     12,
+                    //                     18
+                    //                 ]
+                    //             },
+                    //             {
+                    //                 "month": "May",
+                    //                 "job": [
+                    //                     17,
+                    //                     21
+                    //                 ]
+                    //             },
+                    //             {
+                    //                 "month": "Jun",
+                    //                 "job": [
+                    //                     10,
+                    //                     17
+                    //                 ]
+                    //             },
+                    //             {
+                    //                 "month": "Jul",
+                    //                 "job": [
+                    //                     7,
+                    //                     15
+                    //                 ]
+                    //             },
+                    //             {
+                    //                 "month": "Aug",
+                    //                 "job": [
+                    //                     3,
+                    //                     10
+                    //                 ]
+                    //             },
+                    //             {
+                    //                 "month": "Sep",
+                    //                 "job": [
+                    //                     1,
+                    //                     8
+                    //                 ]
+                    //             }
+                    //         ],
+                    //         courses: [
+                    //             {
+                    //                 "name": "Applied",
+                    //                 "value": 400
+                    //             },
+                    //             {
+                    //                 "name": "Enrolled",
+                    //                 "value": 200
+                    //             },
+                    //             {
+                    //                 "name": "Completed",
+                    //                 "value": 300
+                    //             }
+                    //         ],
+                    //         users: [
+                    //             {
+                    //                 "month": "Jan",
+                    //                 "Rehablitated": 400,
+                    //                 "Joined": 240
+                    //             },
+                    //             {
+                    //                 "month": "Feb",
+                    //                 "Rehablitated": 300,
+                    //                 "Joined": 139
+                    //             },
+                    //             {
+                    //                 "month": "Mar",
+                    //                 "Rehablitated": 200,
+                    //                 "Joined": 980
+                    //             },
+                    //             {
+                    //                 "month": "Apr",
+                    //                 "Rehablitated": 278,
+                    //                 "Joined": 390
+                    //             },
+                    //             {
+                    //                 "month": "May",
+                    //                 "Rehablitated": 189,
+                    //                 "Joined": 480
+                    //             },
+                    //             {
+                    //                 "month": "Jun",
+                    //                 "Rehablitated": 239,
+                    //                 "Joined": 380
+                    //             },
+                    //             {
+                    //                 "month": "Jul",
+                    //                 "Rehablitated": 349,
+                    //                 "Joined": 430
+                    //             }
+                    //         ]
+                    //     }
+                    // }
 
-                setJobs(res.data.jobs);
-                setCourses(res.data.courses);
-                setUsers(res.data.users);
+                    console.log(res.data);
+                    setJobs(res.data.jobs);
+                    setCourses(res.data.courses);
+                    setUsers(res.data.users);
+            })();
         }
         catch {
 

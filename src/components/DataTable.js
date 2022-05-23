@@ -9,17 +9,8 @@ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 import RegistrationForm from './RegistrationForm';
 
-let instance = axios.create({
-    baseURL: 'http://safehouse.herokuapp.com',
-    headers: {
-        post: {
-            'Content-Type': 'application/json'
-        }
-    }
-});
-
 const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'username', headerName: 'Username', width: 150 },
     {
       field: 'firstName',
       headerName: 'First name',
@@ -33,12 +24,29 @@ const columns = [
       editable: false,
     },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 110,
+      field: 'email',
+      headerName: 'E-Mail',
+      width: 150,
       editable: false,
-    }
+    },
+    {
+      field: 'gender',
+      headerName: 'Gender',
+      width: 90,
+      editable: false,
+    },
+    {
+      field: 'phoneNum',
+      headerName: 'Phone #',
+      width: 150,
+      editable: false,
+    },
+    {
+      field: 'address',
+      headerName: 'Address',
+      width: 150,
+      editable: false,
+    },
 ];
 
 const DataTable = (props) => {
@@ -46,6 +54,7 @@ const DataTable = (props) => {
     const [selectedRows, setSelectedRows] = React.useState([]);
     const [drawer, setDrawer] = React.useState(false);
     const [rows, setRows] = React.useState([]);
+    const [users, setUsers] = React.useState([]);
 
     const deleteRows = (e) => {
         console.log(selectedRows);
@@ -59,31 +68,59 @@ const DataTable = (props) => {
                 //     username,
                 //     password
                 // })
-                let res = {
-                    data: {
-                        rows: [
-                            { id: 1, lastName: 'Black', firstName: 'John', age: 35 },
-                            { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-                            { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-                            { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-                            { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: 22 },
-                            { id: 6, lastName: 'Melisandre', firstName: 'Alex', age: 15 },
-                            { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-                            { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-                            { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-                            { id: 10, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-                            { id: 11, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-                            { id: 12, lastName: 'Stark', firstName: 'Arya', age: 16 },
-                            { id: 13, lastName: 'Targaryen', firstName: 'Daenerys', age: 22 },
-                            { id: 14, lastName: 'Melisandre', firstName: 'Alex', age: 15 },
-                            { id: 15, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-                            { id: 16, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-                            { id: 17, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-                        ]
+            (async () => {
+                const res = await axios.get('http://0f07-125-209-114-66.ngrok.io/api/users', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
-                }
+                });
 
-                setRows(res.data.rows);
+                const _rows = res.data.filter((u) => {
+                    console.log(u, props.table);
+                    return u.role === props.table;
+                }).map((user, i) => {
+                    const { username, firstname, lastname, email, gender, address, phoneNum } = user;
+
+                    return {
+                        username,
+                        firstName: firstname,
+                        lastName: lastname,
+                        email,
+                        gender,
+                        phoneNum,
+                        address,
+                        id: i
+                    };
+                });
+
+                setRows(_rows);
+                setUsers(res.data);
+            })();
+                // let res = {
+                //     data: {
+                //         rows: [
+                //             { id: 1, lastName: 'Black', firstName: 'John', age: 35 },
+                //             { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+                //             { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+                //             { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+                //             { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: 22 },
+                //             { id: 6, lastName: 'Melisandre', firstName: 'Alex', age: 15 },
+                //             { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+                //             { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+                //             { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+                //             { id: 10, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+                //             { id: 11, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+                //             { id: 12, lastName: 'Stark', firstName: 'Arya', age: 16 },
+                //             { id: 13, lastName: 'Targaryen', firstName: 'Daenerys', age: 22 },
+                //             { id: 14, lastName: 'Melisandre', firstName: 'Alex', age: 15 },
+                //             { id: 15, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+                //             { id: 16, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+                //             { id: 17, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+                //         ]
+                //     }
+                // }
+
+                // setRows(res.data.rows);
         }
         catch {
 

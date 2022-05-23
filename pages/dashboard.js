@@ -85,7 +85,7 @@ const Sidebar = () => {
                     </ThemeProvider>
                 </Box>
                 <Box sx={{ marginTop: '12px', marginBottom: '28px', marginX: '24px', paddingX: '22px', paddingY: '20px', bgcolor: orange[800]+'20', borderRadius: '8px' }}>
-                    <Typography variant='body1' color={orange[600]} sx={{ fontWeight: 'bold', textAlign: 'center' }}>{(role == 'admin') ? 'Admin' : ngo}</Typography>
+                    <Typography variant='body1' color={orange[600]} sx={{ fontWeight: 'bold', textAlign: 'center' }}>{(role == 'admin') ? 'Admin' : (role === 'ngo') ? name : ngo}</Typography>
                 </Box>
                 {
                     (role == 'ngo') ?
@@ -159,18 +159,18 @@ const Sidebar = () => {
                 </Box>
                 <TabPanel value={value} index={0}>
                     {
-                        (role == 'ngo') ?
+                        (role === 'ngo') ?
                         <GraphingComponent /> :
-                        (role == 'homeless' || role == 'lister') ?
+                        (role === 'homeless' || role === 'lister') ?
                         <WorkshopPortal /> :
                         <NgoTable acceptRequests={false}/>
                     }
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     {
-                        (role == 'ngo') ?
+                        (role === 'ngo') ?
                         <DataTable table='user'/> :
-                        (role == 'homeless' || role == 'lister') ?
+                        (role === 'homeless' || role === 'lister') ?
                         <JobPortal /> :
                         <NgoTable acceptRequests={true}/>
                     }

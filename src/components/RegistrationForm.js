@@ -9,15 +9,6 @@ import { DesktopDatePicker, LocalizationProvider } from '@mui/lab';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import styles from '../../styles/Home.module.css';
 
-let instance = axios.create({
-    baseURL: 'http://safehouse.herokuapp.com',
-    headers: {
-        post: {
-            'Content-Type': 'application/json'
-        }
-    }
-});
-
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -36,6 +27,7 @@ const RegistrationForm = (props) => {
     const [openAlertSnack, setOpenAlertSnack] = React.useState(false);
     const [alertMessage, setAlertMessage] = React.useState('Passwords do not match!');
     const [autoHideDuration, setAutoHideDuration] = React.useState(6000);
+    const [severity, setSeverity] = React.useState("warning");
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -49,6 +41,7 @@ const RegistrationForm = (props) => {
         e.preventDefault();
 
         var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+        setSeverity("warning");
 
         if (!fname || !lname || !username || !password || !email || !gender || !dob || !phone || !address) {
             setAutoHideDuration(6000);
@@ -64,6 +57,35 @@ const RegistrationForm = (props) => {
             setAutoHideDuration(6000);
             setAlertMessage('Passwords do not match!');
             setOpenAlertSnack(true);
+        } else {
+            try {
+                await axios.post('http://0f07-125-209-114-66.ngrok.io/api/signup/ngo', {
+                    firstname: fname,
+                    lastname: lname,
+                    username,
+                    password,
+                    email,
+                    gender: gender.toUpperCase(),
+                    profileImage: '...',
+                    dateOfBirth: dob,
+                    phoneNum: phone,
+                    address,
+                    role: props.role
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                });
+
+                setAutoHideDuration(6000);
+                setSeverity("success");
+                setAlertMessage('User created!');
+                setOpenAlertSnack(true);
+            } catch (e) {
+                setAutoHideDuration(6000);
+                setAlertMessage('Internal Server Error');
+                setOpenAlertSnack(true);
+            }
         }
     }
 
@@ -110,7 +132,7 @@ const RegistrationForm = (props) => {
                 <ColorButtonOutlinedOrange size='medium' fullWidth onClick={() => props.setDrawer(false)}>Cancel</ColorButtonOutlinedOrange>
             </Box>
             <Snackbar open={openAlertSnack} autoHideDuration={autoHideDuration} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
+                <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
                 {alertMessage}
                 </Alert>
             </Snackbar>

@@ -38,12 +38,12 @@ const Appbar = ({ component }) => {
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '8px' }}>
                 <IconButton>
-                    <StyledBadge badgeContent={3}>
+                    <StyledBadge badgeContent={0}>
                         <NotificationsRoundedIcon fontSize="medium" sx={{ color: 'gray' }}/>
                     </StyledBadge>
                 </IconButton>
                 <IconButton>
-                    <StyledBadge badgeContent={4}>
+                    <StyledBadge badgeContent={0}>
                         <ChatBubbleRoundedIcon fontSize="medium" sx={{ color: 'gray' }}/>
                     </StyledBadge>
                 </IconButton>

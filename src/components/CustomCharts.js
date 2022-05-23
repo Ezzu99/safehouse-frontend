@@ -39,19 +39,19 @@ const CustomPieTooltip = ({ active, payload, label }) => {
 
 const CustomLineTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
-        console.log(payload)
+        console.log(payload);
         return (
             <Box sx={{ width: '170px', padding: '12px', bgcolor: '#FFFFFF', borderRadius: '6px', boxShadow: '0 10px 18px #33333350', display: 'flex', flexDirection: 'column' }} >
                 <Box>
-                    <Typography sx={{ color: orange[600] }} >{payload[0].payload.month}</Typography>
+                    <Typography sx={{ color: orange[600], textTransform: 'capitalize' }} >{payload[0].payload.month}</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} >
-                    <Typography sx={{ color: '#555' }} >{payload[0].name}: </Typography>
-                    <Typography sx={{ color: '#555' }} >{payload[0].value}</Typography>
+                    <Typography sx={{ color: '#555' }} >{'Joined'}: </Typography>
+                    <Typography sx={{ color: '#555' }} >{payload[0].payload['Joined']}</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} >
-                    <Typography sx={{ color: '#555' }} >{payload[1].name}: </Typography>
-                    <Typography sx={{ color: '#555' }} >{payload[1].value}</Typography>
+                    <Typography sx={{ color: '#555' }} >{'Rehabilitated'}: </Typography>
+                    <Typography sx={{ color: '#555' }} >{payload[0].payload['Rehabilitated']}</Typography>
                 </Box>
             </Box>
         );
@@ -136,7 +136,7 @@ const CustomLineGraph = ({ users }) => {
                         <Tooltip allowEscapeViewBox={{ y: false, x: false }} content={<CustomLineTooltip />} />
                         <Legend />
                         <Line type="monotone" dataKey="Joined" stroke={orange[600]} strokeWidth={4} />
-                        <Line type="monotone" dataKey="Rehablitated" stroke={purple[600]} strokeWidth={2} />
+                        <Line type="monotone" dataKey="Rehabilitated" stroke={purple[600]} strokeWidth={2} />
                     </LineChart>
                 </ResponsiveContainer> :
                 <ResponsiveContainer width="100%" height="100%" >
