@@ -55,9 +55,9 @@ function a11yProps(index) {
 }
 
 const Sidebar = () => {
-    const [name, setName] = React.useState("");
-    const [role, setRole] = React.useState("");
-    const [ngo, setNgo] = React.useState("");
+    const [name, setName] = React.useState(localStorage.getItem("name"));
+    const [role, setRole] = React.useState(localStorage.getItem("role"));
+    const [ngo, setNgo] = React.useState(localStorage.getItem("ngo"));
     const [value, setValue] = React.useState(0);
     let router = useRouter();
 
@@ -131,7 +131,7 @@ const Sidebar = () => {
                         color={orange[600]}
                         sx={{ fontWeight: "bold", textAlign: "center" }}
                     >
-                        {role == "admin" ? "Admin" : ngo}
+                        {role == "admin" ? "Admin" : role == "ngo" ? name : ngo}
                     </Typography>
                 </Box>
                 {role.toLowerCase() == "ngo" ? (
@@ -187,7 +187,7 @@ const Sidebar = () => {
                             }}
                             {...a11yProps(1)}
                         />
-                        <Tab
+                        {/* <Tab
                             label="Listers"
                             icon={
                                 <PeopleAltRoundedIcon
@@ -204,9 +204,9 @@ const Sidebar = () => {
                                 paddingLeft: "20px",
                             }}
                             {...a11yProps(2)}
-                        />
+                        /> */}
                     </Tabs>
-                ) : role.toLowerCase() == "homeless" ? (
+                ) : role.toLowerCase() == "user" ? (
                     <Tabs
                         orientation="vertical"
                         variant="scrollable"
@@ -407,11 +407,11 @@ const Sidebar = () => {
                         <JobPortal />
                     )}
                 </TabPanel>
-                <TabPanel value={value} index={2}>
+                {/* <TabPanel value={value} index={2}>
                     {role.toLowerCase() == "ngo" ? (
                         <DataTable table="lister" />
                     ) : null}
-                </TabPanel>
+                </TabPanel> */}
             </Box>
         </Box>
     );

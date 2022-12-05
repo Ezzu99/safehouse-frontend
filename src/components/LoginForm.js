@@ -86,8 +86,8 @@ const LoginForm = () => {
                 setUsername(res.data.username);
                 setName(res.data.name);
                 setEmail(res.data.email);
-                setNgo(res.data.name);
-                setPhone(res.data.phone);
+                setNgo(res.data.affiliatedOrg);
+                setPhone(res.data.phoneNum);
                 setAddress(res.data.address);
                 setProfileImage(
                     "https://images.pexels.com/photos/1226302/pexels-photo-1226302.jpeg?cs=srgb&dl=pexels-tausif-hossain-1226302.jpg&fm=jpg"

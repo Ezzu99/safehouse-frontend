@@ -25,7 +25,7 @@ export default function AccountMenu() {
         setName(
             role.toLowerCase() == "admin"
                 ? "Admin"
-                : localStorage.getItem("name")
+                : localStorage.getItem("username")
         );
         setEmail(
             role.toLowerCase() == "admin"

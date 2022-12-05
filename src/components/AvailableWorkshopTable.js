@@ -77,7 +77,7 @@ const AvailableWorkshopTable = (props) => {
     const [disable, setDisable] = React.useState(false);
     const [selectedRows, setSelectedRows] = React.useState([]);
     const [drawer, setDrawer] = React.useState(false);
-    const [role, setrole] = React.useState();
+    const [role, setrole] = React.useState(localStorage.getItem("role"));
 
     const deleteRows = (e) => {
         console.log(selectedRows);
@@ -123,7 +123,7 @@ const AvailableWorkshopTable = (props) => {
                         justifyContent: "center",
                     }}
                 >
-                    {role != "homeless" ? (
+                    {role != "user" ? (
                         <IconButton disabled={disable} onClick={deleteRows}>
                             <DeleteRoundedIcon />
                         </IconButton>
@@ -138,7 +138,7 @@ const AvailableWorkshopTable = (props) => {
                         </Button>
                     )}
                 </Box>
-                {role != "homeless" ? (
+                {role != "user" ? (
                     <Box sx={{ marginRight: "4px" }}>
                         <ColorButtonSolidOrange
                             variant="contained"
