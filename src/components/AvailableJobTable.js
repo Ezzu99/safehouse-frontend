@@ -23,7 +23,7 @@ const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
         field: "name",
-        headerName: "Job",
+        headerName: "Job Name",
         width: 150,
         editable: false,
     },
@@ -34,37 +34,69 @@ const columns = [
         editable: false,
     },
     {
-        field: "description",
+        field: "Job URL",
+        headerName: "url",
+        width: 150,
+        editable: false,
+    },
+    {
+        field: "desc",
         headerName: "Description",
         width: 150,
         editable: false,
     },
 ];
 
-const rows = [
-    { id: 1, description: "ReactJS1", name: "Astera", employer: "John" },
-    { id: 2, description: "AngularJS", name: "Motive", employer: "John" },
-    { id: 3, description: "VueJS", name: "Brainx", employer: "John" },
-    { id: 4, description: "Python", name: "Arya", employer: "Cena" },
-    { id: 5, description: "C++", name: "Daenerys", employer: "Cena" },
-    { id: 6, description: "NodeJS", name: "Flex", employer: "Cena" },
-    { id: 7, description: "JavaScript", name: "Astera", employer: "Cena" },
-];
-
 const AvailableJobTable = (props) => {
+    const [jobs, setJobs] = React.useState([]);
     const [disable, setDisable] = React.useState(false);
     const [selectedRows, setSelectedRows] = React.useState([]);
     const [drawer, setDrawer] = React.useState(false);
     const [role, setrole] = React.useState(localStorage.getItem("role"));
+    const [token, setToken] = React.useState(localStorage.getItem("token"));
 
-    const deleteRows = (e) => {
+    let instance = axios.create({
+        baseURL: "http://127.0.0.1:3000",
+        headers: {
+            post: {
+                "Content-Type": "application/json",
+            },
+            authorization: `Bearer ${token}`,
+        },
+    });
+
+    const fetchJobs = async () => {
+        try {
+            let res = await instance.get("/api/jobs");
+
+            console.log(res.data);
+            setJobs(res.data);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const deleteRows = async (id) => {
         console.log(selectedRows);
+
+        try {
+            let res = await instance.delete(`/api/jobs/${id}`);
+
+            console.log(res.data);
+            fetchJobs();
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     React.useEffect(() => {
         selectedRows.length == 0 ? setDisable(true) : setDisable(false);
         setrole(localStorage.getItem("role"));
     }, [selectedRows]);
+
+    React.useEffect(() => {
+        fetchJobs();
+    }, []);
 
     return (
         <Box
@@ -130,7 +162,7 @@ const AvailableJobTable = (props) => {
                 ) : null}
             </Box>
             <DataGrid
-                rows={rows}
+                rows={jobs}
                 columns={columns}
                 rowsPerPageOptions={[5]}
                 autoPageSize
@@ -181,7 +213,7 @@ const AvailableJobTable = (props) => {
                 onBackdropClick={() => setDrawer(false)}
                 sx={{ backdropFilter: "blur(1px)", filter: "none" }}
             >
-                <JobForm setDrawer={setDrawer} />
+                <JobForm setDrawer={setDrawer} fetchJobs={fetchJobs} />
             </Drawer>
         </Box>
     );
