@@ -34,8 +34,8 @@ const columns = [
         editable: false,
     },
     {
-        field: "Job URL",
-        headerName: "url",
+        field: "url",
+        headerName: "Job URL",
         width: 150,
         editable: false,
     },
@@ -76,17 +76,19 @@ const AvailableJobTable = (props) => {
         }
     };
 
-    const deleteRows = async (id) => {
+    const deleteRows = () => {
         console.log(selectedRows);
 
-        try {
-            let res = await instance.delete(`/api/jobs/${id}`);
+        selectedRows.map(async (id, index) => {
+            try {
+                let res = await instance.delete(`/api/jobs/${id}`);
 
-            console.log(res.data);
-            fetchJobs();
-        } catch (e) {
-            console.log(e);
-        }
+                console.log(res.data);
+                fetchJobs();
+            } catch (e) {
+                console.log(e);
+            }
+        });
     };
 
     React.useEffect(() => {

@@ -11,20 +11,11 @@ import RegistrationForm from "./RegistrationForm";
 import SendIcon from "@mui/icons-material/Send";
 import WorkshopForm from "./WorkshopForm";
 
-let instance = axios.create({
-    baseURL: "http://safehouse.herokuapp.com",
-    headers: {
-        post: {
-            "Content-Type": "application/json",
-        },
-    },
-});
-
 const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
         field: "name",
-        headerName: "Workshop",
+        headerName: "Course Name",
         width: 150,
         editable: false,
     },
@@ -35,58 +26,71 @@ const columns = [
         editable: false,
     },
     {
-        field: "description",
+        field: "url",
+        headerName: "Course URL",
+        width: 150,
+        editable: false,
+    },
+    {
+        field: "desc",
         headerName: "Description",
         width: 710,
         editable: false,
     },
 ];
 
-const rows = [
-    {
-        id: 1,
-        name: "Data Science",
-        instructor: "Jon",
-        description:
-            "Master data science, Python & SQL, analyze & visualize data, build machine learning models",
-    },
-    {
-        id: 2,
-        name: "Data Science",
-        instructor: "Cersei",
-        description:
-            "Master data science, Python & SQL, analyze & visualize data, build machine learning models",
-    },
-    {
-        id: 3,
-        name: "Data Science",
-        instructor: "Jaime",
-        description:
-            "Master data science, Python & SQL, analyze & visualize data, build machine learning models",
-    },
-    {
-        id: 4,
-        name: "Data Science",
-        instructor: "Arya",
-        description:
-            "Master data science, Python & SQL, analyze & visualize data, build machine learning models",
-    },
-];
-
 const AvailableWorkshopTable = (props) => {
+    const [courses, setCourses] = React.useState([]);
     const [disable, setDisable] = React.useState(false);
     const [selectedRows, setSelectedRows] = React.useState([]);
     const [drawer, setDrawer] = React.useState(false);
     const [role, setrole] = React.useState(localStorage.getItem("role"));
+    const [token, setToken] = React.useState(localStorage.getItem("token"));
 
-    const deleteRows = (e) => {
+    let instance = axios.create({
+        baseURL: "http://127.0.0.1:3000",
+        headers: {
+            post: {
+                "Content-Type": "application/json",
+            },
+            authorization: `Bearer ${token}`,
+        },
+    });
+
+    const fetchWorkshops = async () => {
+        try {
+            let res = await instance.get("/api/courses");
+
+            console.log(res.data);
+            setCourses(res.data);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const deleteRows = () => {
         console.log(selectedRows);
+
+        selectedRows.map(async (id, index) => {
+            try {
+                let res = await instance.delete(`/api/courses/${id}`);
+
+                console.log(res.data);
+                fetchWorkshops();
+            } catch (e) {
+                console.log(e);
+            }
+        });
     };
 
     React.useEffect(() => {
         selectedRows.length == 0 ? setDisable(true) : setDisable(false);
         setrole(localStorage.getItem("role"));
     }, [selectedRows]);
+
+    React.useEffect(() => {
+        fetchWorkshops();
+    }, []);
 
     return (
         <Box
@@ -152,7 +156,7 @@ const AvailableWorkshopTable = (props) => {
                 ) : null}
             </Box>
             <DataGrid
-                rows={rows}
+                rows={courses}
                 columns={columns}
                 rowsPerPageOptions={[5]}
                 autoPageSize
@@ -203,7 +207,10 @@ const AvailableWorkshopTable = (props) => {
                 onBackdropClick={() => setDrawer(false)}
                 sx={{ backdropFilter: "blur(1px)", filter: "none" }}
             >
-                <WorkshopForm setDrawer={setDrawer} />
+                <WorkshopForm
+                    setDrawer={setDrawer}
+                    fetchWorkshops={fetchWorkshops}
+                />
             </Drawer>
         </Box>
     );
