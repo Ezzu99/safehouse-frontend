@@ -35,6 +35,7 @@ const RegistrationForm = (props) => {
     const [password, setPassword] = React.useState("");
     const [cPassword, setCPassword] = React.useState("");
     const [email, setEmail] = React.useState("");
+    const [role, setRole] = React.useState("");
     const [gender, setGender] = React.useState("");
     const [dob, setdob] = React.useState();
     const [phone, setPhone] = React.useState("");
@@ -74,6 +75,7 @@ const RegistrationForm = (props) => {
             !username ||
             !password ||
             !email ||
+            !role ||
             !gender ||
             !dob ||
             !phone ||
@@ -106,7 +108,7 @@ const RegistrationForm = (props) => {
                 phoneNum: phone,
                 address,
                 dateOfBirth: dob,
-                role: props.role,
+                role: role,
                 orgUsername: ngoUsername,
             });
 
@@ -136,7 +138,7 @@ const RegistrationForm = (props) => {
                 }}
             >
                 <Typography variant="h5" fontWeight="bold" color={purple[600]}>
-                    Register {props.role}
+                    Register User
                 </Typography>
             </Box>
             <Box
@@ -201,12 +203,34 @@ const RegistrationForm = (props) => {
                         color="secondary"
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <CustomTextField
-                        disabled
-                        label="Role"
-                        value={props.role}
-                        color="secondary"
-                    />
+                    <FormControl>
+                        <InputLabel color="secondary">Role</InputLabel>
+                        <Select
+                            sx={{
+                                width: "130px",
+                                backdropFilter: "blur(10px)",
+                                "&:hover": {
+                                    "&& fieldset": { borderColor: purple[600] },
+                                },
+                            }}
+                            MenuProps={{
+                                PaperProps: {
+                                    sx: {
+                                        "& .MuiMenuItem-root.Mui-selected": {
+                                            backgroundColor: purple[100],
+                                        },
+                                    },
+                                },
+                            }}
+                            color="secondary"
+                            label="Role"
+                            value={role}
+                            onChange={(e) => setRole(e.target.value)}
+                        >
+                            <MenuItem value="USER">User</MenuItem>
+                            <MenuItem value="LISTER">Lister</MenuItem>
+                        </Select>
+                    </FormControl>
                 </Box>
                 <Box
                     sx={{ display: "flex", flexDirection: "row", gap: "12px" }}
